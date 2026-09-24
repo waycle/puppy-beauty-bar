@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a1a1a">
+<title>Puppy Beauty Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  background:#f7f4f2;color:#1a1a1a;overflow-x:hidden;
+  padding-top:58px;
+  padding-bottom:calc(64px + env(safe-area-inset-bottom,0px));
+  min-height:100vh;
+}
+:root{
+  --rose:#C8748A;--rose-h:#B5617A;--rose-lt:#E8A4B8;--rose-pale:#FEF2F5;
+  --gold:#c9a96e;--gold-pale:#fff8ee;
+  --dark:#1a1a1a;--dark2:#2d2d2d;--mid:#5e5e5e;--light:#f7f4f2;--white:#fff;
+  --r:14px;--r2:20px;
+  --sh:0 2px 12px rgba(0,0,0,.07);--sh2:0 8px 32px rgba(0,0,0,.13);
+}
+h1,h2,h3{font-family:'Cormorant Garamond','Playfair Display',Georgia,serif;line-height:1.2;}
+h1{font-size:1.9rem;}h2{font-size:1.35rem;}h3{font-size:1rem;font-weight:600;}
+p{line-height:1.7;color:var(--mid);}
+a{text-decoration:none;color:inherit;}
+
+/* ── HEADER ── */
+.app-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:58px;background:var(--dark);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;padding-top:env(safe-area-inset-top,0px);
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+}
+.header-logo{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:1.1rem;color:var(--rose-lt);}
+.header-book-btn{background:var(--rose);color:#fff;font-size:.75rem;font-weight:700;padding:7px 16px;border-radius:20px;border:none;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;}
+.header-book-btn:active{background:var(--rose-h);}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--dark);display:flex;align-items:stretch;
+  border-top:1px solid rgba(255,255,255,.07);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.nav-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:9px 4px 8px;
+  background:none;border:none;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;font-family:'Inter',sans-serif;
+  transition:background .12s;
+}
+.nav-tab:active{background:rgba(255,255,255,.05);}
+.nav-tab .tab-icon{font-size:1.2rem;line-height:1;transition:transform .15s;}
+.nav-tab .tab-label{font-size:.58rem;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase;transition:color .15s;}
+.nav-tab.active .tab-label{color:var(--rose-lt);}
+.nav-tab.active .tab-icon{transform:scale(1.14);}
+.tab-dot{width:4px;height:4px;border-radius:50%;background:var(--rose);margin-top:2px;display:none;}
+.nav-tab.active .tab-dot{display:block;}
+
+/* ── TABS ── */
+.tab-section{display:none;}
+.tab-section.active{display:block;animation:fadeIn .22s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SHARED ── */
+.section-label{font-size:.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:6px;}
+.tab-hero{
+  background:linear-gradient(160deg,#1a0a12 0%,#2e1220 50%,#1c0d26 100%);
+  padding:28px 20px 22px;position:relative;overflow:hidden;
+}
+.tab-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 20%,rgba(200,116,138,.12),transparent 60%);}
+.tab-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--rose));}
+.tab-hero h1{color:#fff;font-size:1.55rem;margin-bottom:2px;position:relative;}
+.tab-hero p{color:rgba(255,255,255,.42);font-size:.84rem;margin-top:4px;position:relative;}
+
+/* ════════════════════════
+   HOME TAB
+════════════════════════ */
+.home-hero{
+  background:linear-gradient(150deg,#1a0a12 0%,#2e1220 40%,#1c0d26 100%);
+  padding:36px 24px 32px;text-align:center;position:relative;overflow:hidden;
+}
+.home-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(200,116,138,.15),transparent 70%);}
+.home-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--rose));}
+.home-hero-inner{position:relative;z-index:1;}
+.hero-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block;}
+.home-hero h1{color:#fff;font-size:1.9rem;margin-bottom:4px;}
+.home-hero h1 em{color:var(--rose-lt);font-style:italic;}
+.home-hero .hero-sub{color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:20px;}
+.status-chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.8);font-size:.75rem;font-weight:600;padding:7px 16px;border-radius:20px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#6ecf7f;box-shadow:0 0 7px #6ecf7f;flex-shrink:0;}
+.status-dot.closed{background:#e07070;box-shadow:0 0 7px #e07070;}
+
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px 16px;}
+.qa-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px 8px;background:var(--white);border-radius:var(--r);box-shadow:var(--sh);cursor:pointer;-webkit-tap-highlight-color:transparent;border:none;font-family:'Inter',sans-serif;transition:transform .12s;}
+.qa-btn:active{transform:scale(.95);}
+.qa-icon{font-size:1.5rem;line-height:1;}
+.qa-label{font-size:.72rem;font-weight:600;color:var(--mid);}
+.qa-btn.qa-primary{background:linear-gradient(135deg,var(--rose),var(--rose-h));box-shadow:0 6px 20px rgba(200,116,138,.35);}
+.qa-btn.qa-primary .qa-label{color:rgba(255,255,255,.9);}
+
+.home-section{padding:0 16px 20px;}
+.home-section-title{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose);margin-bottom:12px;display:block;}
+
+.mini-svc-list{display:flex;flex-direction:column;gap:8px;}
+.mini-svc{background:var(--white);border-radius:var(--r);display:flex;align-items:center;gap:12px;padding:13px 16px;box-shadow:var(--sh);border-left:3px solid var(--rose);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s;}
+.mini-svc:active{transform:scale(.98);}
+.mini-svc-emoji{font-size:1.4rem;flex-shrink:0;}
+.mini-svc-name{font-size:.88rem;font-weight:600;color:var(--dark);flex:1;}
+.mini-svc-price{font-size:.82rem;font-weight:700;color:var(--rose);white-space:nowrap;}
+
+.see-all-btn{display:block;width:100%;background:none;border:1.5px solid var(--rose);color:var(--rose);font-size:.85rem;font-weight:600;padding:13px;border-radius:50px;text-align:center;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;transition:background .12s,color .12s;}
+.see-all-btn:active{background:var(--rose);color:#fff;}
+
+.mini-review{background:linear-gradient(135deg,var(--rose),#b5617a);border-radius:var(--r2);padding:22px 20px;box-shadow:0 8px 28px rgba(200,116,138,.3);}
+.stars-mini{color:rgba(255,255,255,.85);letter-spacing:3px;font-size:.95rem;margin-bottom:10px;}
+.review-text{font-style:italic;color:rgba(255,255,255,.9);font-size:.88rem;line-height:1.65;margin-bottom:12px;}
+.review-author{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.6);}
+
+/* ════════════════════════
+   SERVICES TAB
+════════════════════════ */
+.svc-section{padding:20px 16px 0;}
+.svc-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.svc-section-label{font-size:.62rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--mid);}
+.svc-count{font-size:.7rem;color:var(--mid);background:#f0ebe8;padding:2px 9px;border-radius:8px;font-weight:600;}
+
+.svc-cards{display:flex;flex-direction:column;gap:12px;}
+.svc-card{background:var(--white);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s,box-shadow .12s;}
+.svc-card:active{transform:scale(.985);box-shadow:none;}
+.svc-card-top{display:flex;align-items:center;gap:14px;padding:18px 18px 14px;background:linear-gradient(135deg,rgba(200,116,138,.05),rgba(200,116,138,.01));border-bottom:1px solid rgba(0,0,0,.04);}
+.svc-icon-circle{width:52px;height:52px;border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,var(--rose-pale),#f5dedd);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+.svc-meta{flex:1;min-width:0;}
+.svc-name{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:2px;}
+.svc-timing{font-size:.74rem;color:var(--mid);}
+.svc-price-badge{font-size:.9rem;font-weight:700;color:var(--rose);white-space:nowrap;flex-shrink:0;}
+.svc-card-bottom{padding:12px 18px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.svc-desc{font-size:.8rem;color:var(--mid);line-height:1.55;flex:1;}
+.svc-book-btn{flex-shrink:0;background:var(--rose);color:#fff;font-size:.72rem;font-weight:700;padding:8px 14px;border-radius:20px;border:none;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+
+.cs-divider{display:flex;align-items:center;gap:12px;padding:24px 16px 12px;}
+.cs-divider::before,.cs-divider::after{content:'';flex:1;height:1px;background:#e8e2de;}
+.cs-tag{font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);white-space:nowrap;background:var(--gold-pale);border:1px solid #f0d98a;padding:4px 12px;border-radius:12px;}
+.cs-section{padding:0 16px 28px;}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;opacity:.65;}
+.cs-card{background:var(--white);border-radius:var(--r);padding:16px;box-shadow:var(--sh);border-top:3px solid var(--gold);}
+.cs-card-emoji{font-size:1.6rem;display:block;margin-bottom:8px;}
+.cs-card-name{font-size:.85rem;font-weight:600;color:var(--dark);display:block;margin-bottom:4px;}
+.cs-card-price{font-size:.78rem;font-weight:700;color:var(--gold);}
+.cs-badge{display:inline-block;margin-top:6px;font-size:.52rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:#fff;padding:2px 8px;border-radius:6px;}
+
+/* ════════════════════════
+   BOOK TAB
+════════════════════════ */
+.book-body{padding:20px 16px;}
+
+.patch-alert{background:var(--gold-pale);border:1.5px solid #f0d98a;border-radius:var(--r);padding:14px 16px;font-size:.82rem;color:#7a6000;line-height:1.6;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start;}
+.patch-alert-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+
+.book-form-card{background:var(--white);border-radius:var(--r2);box-shadow:var(--sh2);overflow:hidden;margin-bottom:16px;}
+.form-section{padding:20px 20px 0;}
+.form-section-title{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.form-section-title::after{content:'';flex:1;height:1px;background:var(--rose-pale);}
+.form-divider{height:1px;background:#f0ebe8;margin:20px 0 0;}
+.form-group{margin-bottom:14px;}
+.form-group:last-child{margin-bottom:0;}
+.form-label{font-size:.75rem;font-weight:600;color:var(--dark2);display:block;margin-bottom:6px;}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:12px 14px;
+  background:#faf8f7;border:1.5px solid #ede7e3;border-radius:10px;
+  font-size:.9rem;color:var(--dark);font-family:'Inter',sans-serif;
+  -webkit-appearance:none;appearance:none;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(200,116,138,.12);background:#fff;}
+.form-select{
+  background-color:#faf8f7;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235e5e5e' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;
+}
+.form-textarea{resize:none;min-height:80px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-checkbox-row{display:flex;align-items:flex-start;gap:12px;padding:4px 0;}
+.form-checkbox{width:20px;height:20px;min-width:20px;flex-shrink:0;accent-color:var(--rose);margin-top:1px;cursor:pointer;}
+.form-checkbox-label{font-size:.82rem;color:var(--mid);line-height:1.5;cursor:pointer;}
+.form-checkbox-label strong{color:var(--dark);}
+.form-submit-section{padding:20px 20px 22px;}
+
+.book-submit{
+  display:block;width:100%;
+  background:linear-gradient(135deg,var(--rose),var(--rose-h));
+  color:#fff;text-align:center;padding:17px 24px;border-radius:50px;
+  font-size:1rem;font-weight:700;letter-spacing:.3px;
+  box-shadow:0 8px 24px rgba(200,116,138,.35);
+  border:none;cursor:pointer;font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;transition:transform .12s,box-shadow .12s;
+  margin-bottom:12px;
+}
+.book-submit:active{transform:scale(.97);box-shadow:0 4px 12px rgba(200,116,138,.25);}
+.book-note{text-align:center;font-size:.78rem;color:var(--mid);line-height:1.65;}
+
+.book-success{display:none;text-align:center;background:var(--white);border-radius:var(--r2);padding:44px 24px 36px;box-shadow:var(--sh2);margin-bottom:20px;}
+.success-icon{font-size:3rem;margin-bottom:16px;display:block;}
+.success-title{color:var(--dark);margin-bottom:8px;}
+.success-msg{font-size:.88rem;color:var(--mid);line-height:1.75;margin-bottom:24px;}
+.success-reset{display:inline-block;background:none;border:1.5px solid var(--rose);color:var(--rose);font-size:.88rem;font-weight:600;padding:12px 30px;border-radius:50px;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;}
+.success-reset:active{background:var(--rose);color:#fff;}
+
+/* ════════════════════════
+   INFO TAB
+════════════════════════ */
+.info-body{padding:16px;}
+
+.info-hours-card{background:var(--dark);border-radius:var(--r2);padding:24px 20px;margin-bottom:14px;box-shadow:var(--sh2);}
+.info-hours-title{color:rgba(255,255,255,.38);font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px;display:block;}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.hours-row:last-of-type{border-bottom:none;}
+.hours-row .day{color:rgba(255,255,255,.6);font-size:.88rem;}
+.hours-row .time{color:var(--rose-lt);font-weight:600;font-size:.88rem;}
+.appt-note{margin-top:16px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.2);border-radius:10px;padding:10px 14px;font-size:.78rem;color:var(--gold);line-height:1.55;}
+
+.info-section-gap{margin-bottom:14px;}
+.contact-item{background:var(--white);border-radius:var(--r);display:flex;align-items:center;gap:14px;padding:15px 16px;box-shadow:var(--sh);margin-bottom:8px;-webkit-tap-highlight-color:transparent;transition:transform .12s;}
+.contact-item:active{transform:scale(.98);}
+.contact-item:last-child{margin-bottom:0;}
+.contact-item-icon{width:42px;height:42px;border-radius:12px;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.contact-item-info{flex:1;min-width:0;}
+.contact-item-label{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:2px;}
+.contact-item-value{font-size:.88rem;font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+.contact-item-value a{color:var(--rose);}
+.contact-arrow{color:#ccc;font-size:.9rem;flex-shrink:0;}
+
+.about-card{background:var(--white);border-radius:var(--r2);padding:22px 20px;margin-bottom:14px;box-shadow:var(--sh);}
+.about-card p{font-size:.86rem;line-height:1.72;margin-bottom:10px;}
+.about-card p:last-child{margin-bottom:0;}
+
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.social-btn{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s;}
+.social-btn:active{transform:scale(.97);}
+.social-btn-icon{font-size:1.3rem;flex-shrink:0;}
+.social-btn-label{font-size:.84rem;font-weight:600;color:var(--dark);}
+
+.view-full-site{display:block;text-align:center;font-size:.82rem;color:var(--rose);font-weight:600;padding:8px 0 12px;}
+
+/* ════════════════════════
+   T&Cs TAB
+════════════════════════ */
+.acc-list{padding:16px 16px 8px;display:flex;flex-direction:column;gap:6px;}
+.acc-item{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);}
+.acc-item[open]{box-shadow:var(--sh2);}
+.acc-head{
+  list-style:none;display:flex;align-items:center;gap:12px;
+  padding:15px 16px;cursor:pointer;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+  transition:background .12s;
+}
+.acc-head::-webkit-details-marker{display:none;}
+.acc-head::marker{display:none;}
+.acc-head:active{background:var(--rose-pale);}
+.acc-emoji{font-size:1.1rem;flex-shrink:0;}
+.acc-title{font-size:.88rem;font-weight:600;color:var(--dark);flex:1;}
+.acc-arrow{width:16px;height:16px;flex-shrink:0;color:var(--mid);-webkit-transition:-webkit-transform .3s;transition:transform .3s;display:block;}
+.acc-item[open] .acc-arrow{-webkit-transform:rotate(180deg);transform:rotate(180deg);}
+.acc-body{padding:4px 16px 16px 44px;}
+.acc-body ul{list-style:none;}
+.acc-body li{font-size:.82rem;color:var(--mid);padding:7px 0;border-bottom:1px solid #f0ebe8;line-height:1.6;}
+.acc-body li:last-child{border-bottom:none;}
+.acc-body li strong{color:var(--dark2);}
+.terms-footer{text-align:center;padding:8px 16px 24px;font-size:.78rem;color:var(--mid);}
+.terms-footer a{color:var(--rose);font-weight:600;}
+
+/* ── LANG SWITCHER ── */
+.lang-switcher{display:flex;gap:3px;align-items:center;}
+.lang-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.5);font-size:.62rem;font-weight:700;padding:4px 8px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,border-color .12s;letter-spacing:.2px;}
+.lang-btn.active{background:var(--rose);border-color:var(--rose);color:#fff;}
+.lang-btn:active{opacity:.75;}
+
+/* ── FEEDBACK ── */
+.feedback-card{background:var(--white);border-radius:var(--r2);padding:22px 20px;margin-bottom:14px;box-shadow:var(--sh);}
+.feedback-card h3{font-size:1rem;color:var(--dark);margin-bottom:4px;}
+.feedback-card p{font-size:.82rem;color:var(--mid);margin-bottom:16px;line-height:1.6;}
+.m-star-picker{display:flex;gap:6px;margin:6px 0 14px;}
+.m-star-btn{background:none;border:none;cursor:pointer;font-size:1.6rem;color:#ddd;padding:0;transition:color .12s,transform .12s;-webkit-tap-highlight-color:transparent;}
+.m-star-btn.active{color:var(--gold);}
+.m-star-btn:active{transform:scale(1.2);}
+.m-file-area{border:2px dashed #e0d8d5;border-radius:10px;padding:16px;text-align:center;font-size:.78rem;color:var(--mid);cursor:pointer;background:#fdf8f6;-webkit-tap-highlight-color:transparent;}
+.m-file-area:active{border-color:var(--rose);background:var(--rose-pale);}
+.m-feedback-submit{display:block;width:100%;background:linear-gradient(135deg,var(--rose),var(--rose-h));color:#fff;text-align:center;padding:15px;border-radius:50px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;margin-top:16px;-webkit-tap-highlight-color:transparent;}
+.m-feedback-submit:active{opacity:.85;}
+.m-fb-success{display:none;text-align:center;padding:28px 20px;background:var(--white);border-radius:var(--r2);box-shadow:var(--sh);margin-bottom:14px;}
+.m-fb-success-icon{font-size:2.5rem;margin-bottom:10px;display:block;}
+.m-fb-success h3{color:var(--dark);margin-bottom:6px;}
+.m-fb-success p{font-size:.84rem;color:var(--mid);margin-bottom:16px;}
+
+/* ── Utility ── */
+.spacer{height:16px;}.spacer-sm{height:8px;}
+
+/* ════════════════════════
+   SHOP TAB
+════════════════════════ */
+.shop-body{padding:16px;}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.m-product-card{background:var(--white);border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column;position:relative;}
+.m-product-img{aspect-ratio:4/3;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;font-size:2.2rem;border-bottom:1px solid #f0ebe8;}
+.m-product-badge{position:absolute;top:8px;left:8px;background:var(--rose);color:#fff;font-size:.52rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border-radius:12px;}
+.m-product-badge.badge-gold{background:var(--gold);}
+.m-product-body{padding:12px;flex:1;display:flex;flex-direction:column;}
+.m-product-cat{font-size:.55rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rose);margin-bottom:3px;display:block;}
+.m-product-name{font-size:.84rem;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.3;}
+.m-product-footer{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid #f0ebe8;margin-top:auto;}
+.m-product-price{font-size:.88rem;font-weight:700;color:var(--rose);}
+.m-product-btn{background:var(--rose);color:#fff;border:none;border-radius:12px;padding:5px 11px;font-size:.68rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;}
+.shop-enquire-hint{text-align:center;font-size:.76rem;color:var(--mid);padding:12px 0 4px;line-height:1.6;}
+.shop-enquire-hint a{color:var(--rose);font-weight:600;}
+.info-terms-link{display:block;width:100%;background:none;border:1.5px solid #e0d8d5;color:var(--mid);font-size:.85rem;font-weight:600;padding:13px;border-radius:50px;text-align:center;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;transition:border-color .12s,color .12s;}
+.info-terms-link:active{border-color:var(--rose);color:var(--rose);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <span class="header-logo">Puppy Beauty Bar</span>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="langBtn_en"   onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="langBtn_zh-s" onclick="setLang('zh-s')">简</button>
+      <button class="lang-btn"        id="langBtn_zh-t" onclick="setLang('zh-t')">繁</button>
+    </div>
+    <button class="header-book-btn" data-i18n="bookNow" onclick="showTab('book')">Book Now</button>
+  </div>
+</header>
+
+<!-- ════ HOME ════ -->
+<section id="tab-home" class="tab-section active">
+
+  <div class="home-hero">
+    <div class="home-hero-inner">
+      <span class="hero-eyebrow" data-i18n="home_eyebrow">Specialist Lash Studio</span>
+      <h1>Puppy <em>Beauty Bar</em></h1>
+      <p class="hero-sub" data-i18n="home_sub">Where eyes do the talking</p>
+      <div class="status-chip">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Loading…</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <a href="tel:+44000000000" class="qa-btn">
+      <span class="qa-icon">📞</span>
+      <span class="qa-label" data-i18n="qa_call">Call</span>
+    </a>
+    <button class="qa-btn qa-primary" onclick="showTab('book')">
+      <span class="qa-icon">📅</span>
+      <span class="qa-label" style="color:rgba(255,255,255,.9)" data-i18n="qa_book">Book</span>
+    </button>
+    <a href="mailto:hello@puppybeautybar.co.uk" class="qa-btn">
+      <span class="qa-icon">✉️</span>
+      <span class="qa-label" data-i18n="qa_email">Email</span>
+    </a>
+  </div>
+
+  <div class="home-section">
+    <span class="home-section-title" data-i18n="home_svc_title">Our Services</span>
+    <div class="mini-svc-list" id="mHomeSvcList"></div>
+    <button class="see-all-btn" data-i18n="home_see_all" onclick="showTab('services')">View All Services →</button>
+  </div>
+
+  <div class="home-section">
+    <span class="home-section-title" data-i18n="home_reviews_title">What Clients Say</span>
+    <div class="mini-review">
+      <div class="stars-mini">★★★★★</div>
+      <p class="review-text" data-i18n="home_review_text">"I got a hybrid set and I'm absolutely obsessed. So full and fluffy yet still natural — my friends keep asking if they're real!"</p>
+      <p class="review-author" data-i18n="home_review_author">— Sophie K. · Hybrid Extensions</p>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+</section>
+
+<!-- ════ SERVICES ════ -->
+<section id="tab-services" class="tab-section">
+
+  <div class="tab-hero">
+    <span class="section-label" data-i18n="svc_eyebrow">What We Offer</span>
+    <h1 data-i18n="svc_h1">Services</h1>
+    <p data-i18n="svc_sub">Tap any service to book instantly</p>
+  </div>
+
+  <!-- Active services — populated from localStorage by initMobileServices() -->
+  <div class="svc-section">
+    <div class="svc-section-head">
+      <span class="svc-section-label" data-i18n="svc_label">Lash Treatments</span>
+      <span class="svc-count" id="mSvcCount"></span>
+    </div>
+    <div class="svc-cards" id="mSvcCards"></div>
+  </div>
+
+  <!-- Coming soon — hidden when empty -->
+  <div id="mComingSoonWrap">
+    <div class="cs-divider"><span class="cs-tag" data-i18n="cs_soon_label">Coming Soon</span></div>
+    <div class="cs-section">
+      <div class="cs-grid" id="mComingSoonGrid"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════ BOOK ════ -->
+<section id="tab-book" class="tab-section">
+
+  <div class="tab-hero">
+    <span class="section-label" data-i18n="book_eyebrow">Appointments</span>
+    <h1 data-i18n="book_h1">Book a Visit</h1>
+    <p data-i18n="book_sub">By appointment only · Open 7 days a week</p>
+  </div>
+
+  <div class="book-body">
+
+    <!-- Patch test info removed; allergy confirmation handled via T&Cs -->
+
+    <!-- Form -->
+    <div id="mBookFormWrap">
+      <form class="book-form-card" id="mBookForm" onsubmit="submitMobileBooking(event)" novalidate>
+
+        <div class="form-section">
+          <div class="form-section-title" data-i18n="fs_service">Choose Service</div>
+          <div class="form-group">
+            <label class="form-label" for="mBookService" data-i18n="lbl_service">Service *</label>
+            <!-- Options populated from localStorage by initMobileServices() -->
+            <select class="form-select" id="mBookService" required onchange="updateMobileTimeSlots()">
+              <option value="">— Select a service —</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-section">
+          <div class="form-section-title" data-i18n="fs_datetime">Date &amp; Time</div>
+          <div class="form-group">
+            <label class="form-label" for="mBookDate" data-i18n="lbl_date">Preferred Date *</label>
+            <input class="form-input" type="date" id="mBookDate" required onchange="updateMobileTimeSlots()">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mBookTime" data-i18n="lbl_time">Preferred Time *</label>
+            <select class="form-select" id="mBookTime" required>
+              <option value="">— Select Date First —</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-section">
+          <div class="form-section-title" data-i18n="fs_details">Your Details</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="mBookFirst" data-i18n="lbl_first">First Name *</label>
+              <input class="form-input" type="text" id="mBookFirst" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mBookLast" data-i18n="lbl_last">Last Name *</label>
+              <input class="form-input" type="text" id="mBookLast" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mBookPhone" data-i18n="lbl_phone">Phone Number *</label>
+            <input class="form-input" type="tel" id="mBookPhone" placeholder="+44 7xxx xxxxxx" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mBookEmail" data-i18n="lbl_email">Email Address *</label>
+            <input class="form-input" type="email" id="mBookEmail" placeholder="you@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-section">
+          <div class="form-section-title" data-i18n="fs_extras">Extras</div>
+          <div class="form-group">
+            <label class="form-label" for="mBookNotes" data-i18n="lbl_notes">Notes or questions (optional)</label>
+            <textarea class="form-textarea" id="mBookNotes" placeholder="Allergies, special requests, questions…"></textarea>
+          </div>
+          <!-- Patch-test checkbox removed; allergy confirmation is included in T&Cs -->
+          <div class="form-group">
+            <div class="form-checkbox-row">
+              <input class="form-checkbox" type="checkbox" id="mBookTerms" required>
+              <label class="form-checkbox-label" for="mBookTerms" data-i18n="terms_check">I agree to the <span style="color:var(--rose);font-weight:600;cursor:pointer" onclick="showTab('terms')">Terms &amp; Conditions</span>.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-submit-section">
+          <button type="submit" class="book-submit" data-i18n="book_submit">Request Appointment ✦</button>
+          <p class="book-note" data-i18n="book_note">We'll confirm your booking within 24 hours via phone or email. Your appointment is not confirmed until you hear from us.</p>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success -->
+    <div class="book-success" id="mBookSuccess">
+      <span class="success-icon" data-i18n="success_icon">✅</span>
+      <h2 class="success-title" data-i18n="success_title">Request Received!</h2>
+      <p class="success-msg" data-i18n="success_msg">Thank you for booking with Puppy Beauty Bar.<br>We'll confirm your appointment within <strong>24 hours</strong> via phone or email.<br><br>Please remember: no contact lenses on the day, and arrive 5 minutes early.</p>
+      <button class="success-reset" data-i18n="book_another" onclick="resetMobileBooking()">Book Another →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ INFO ════ -->
+<section id="tab-info" class="tab-section">
+
+  <div class="tab-hero">
+    <span class="section-label" data-i18n="info_eyebrow">Find Us</span>
+    <h1 data-i18n="info_h1">Info &amp; Contact</h1>
+    <p data-i18n="info_sub">Everything you need to know</p>
+  </div>
+
+  <div class="info-body">
+
+    <div class="info-hours-card">
+      <span class="info-hours-title" data-i18n="hours_title">Opening Hours</span>
+      <div class="hours-row">
+        <span class="day" data-i18n="hours_days">Monday – Sunday</span>
+        <span class="time">10:00 AM – 5:00 PM</span>
+      </div>
+      <div class="appt-note" data-i18n="hours_appt">🔔 By appointment only. The studio is unstaffed without a confirmed booking — please book in advance.</div>
+    </div>
+
+    <div class="info-section-gap">
+      <span class="section-label" style="margin-bottom:10px;display:block" data-i18n="contact_title">Contact Us</span>
+      <a href="tel:+447456347231" class="contact-item" id="mContactPhoneItem">
+        <div class="contact-item-icon">📞</div>
+        <div class="contact-item-info">
+          <span class="contact-item-label" data-i18n="lbl_phone_c">Phone</span>
+          <span class="contact-item-value" id="mContactPhone">+447456347231</span>
+        </div>
+        <span class="contact-arrow">›</span>
+      </a>
+      <a href="mailto:cline.studio.limited@gmail.com" class="contact-item" id="mContactEmailItem">
+        <div class="contact-item-icon">📧</div>
+        <div class="contact-item-info">
+          <span class="contact-item-label" data-i18n="lbl_email_c">Email</span>
+          <span class="contact-item-value" id="mContactEmail">cline.studio.limited@gmail.com</span>
+        </div>
+        <span class="contact-arrow">›</span>
+      </a>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-info">
+          <span class="contact-item-label" data-i18n="lbl_address">Address</span>
+          <span class="contact-item-value" id="mContactAddress">[Your Salon Address]</span>
+        </div>
+        <span class="contact-arrow">›</span>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <span class="section-label" data-i18n="about_title">About Us</span>
+      <p data-i18n="about_p1">Puppy Beauty Bar is a dedicated specialist lash studio. We believe your eyes are your most expressive feature — and we're here to make them shine.</p>
+      <p data-i18n="about_p2">We use only premium, skin-safe adhesives and materials, staying current with the latest techniques — all while keeping your comfort and safety first.</p>
+    </div>
+
+    <!-- FEEDBACK FORM -->
+    <div class="m-fb-success" id="mFbSuccess">
+      <span class="m-fb-success-icon">✓</span>
+      <h3 data-i18n="fb_success_title">Thank You!</h3>
+      <p data-i18n="fb_success_msg">Your review has been received and will be reviewed before publishing.</p>
+      <button class="m-feedback-submit" style="margin-top:0" data-i18n="fb_another" onclick="resetMobileFeedback()">Leave Another Review</button>
+    </div>
+    <div class="feedback-card" id="mFbFormWrap">
+      <h3 data-i18n="fb_title">Leave a Review</h3>
+      <p data-i18n="fb_desc">Share your experience — it'll be reviewed by our team before appearing on the site.</p>
+      <div class="form-group">
+        <label class="form-label" for="mFbName" data-i18n="lbl_fb_name">Your Name *</label>
+        <input class="form-input" type="text" id="mFbName" placeholder="Jane Smith">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mFbService" data-i18n="lbl_fb_service">Service *</label>
+        <select class="form-select" id="mFbService">
+          <option value="">— Select —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="lbl_fb_rating">Your Rating *</label>
+        <div class="m-star-picker" id="mFbRating">
+          <button type="button" class="m-star-btn" onclick="setMobileRating(1)">★</button>
+          <button type="button" class="m-star-btn" onclick="setMobileRating(2)">★</button>
+          <button type="button" class="m-star-btn" onclick="setMobileRating(3)">★</button>
+          <button type="button" class="m-star-btn" onclick="setMobileRating(4)">★</button>
+          <button type="button" class="m-star-btn" onclick="setMobileRating(5)">★</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mFbComment" data-i18n="lbl_fb_comment">Comment *</label>
+        <textarea class="form-textarea" id="mFbComment" rows="3" placeholder="Tell us about your experience…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="fb_photo_lbl">Photo (optional)</label>
+        <div class="m-file-area" id="mFbPhotoArea" onclick="document.getElementById('mFbPhoto').click()">
+          <span data-i18n="fb_photo_area">Tap to add a photo</span>
+          <input type="file" id="mFbPhoto" accept="image/*" style="display:none" onchange="handleMobileFbPhoto(this)">
+        </div>
+        <div id="mFbPhotoPreview" style="display:none;margin-top:10px">
+          <img id="mFbPhotoImg" src="" alt="Preview" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px;display:block">
+          <button onclick="clearMobileFbPhoto()" data-i18n="fb_remove_photo" style="background:none;border:none;color:var(--rose);font-size:.8rem;font-weight:600;cursor:pointer;margin-top:6px;padding:0">Remove photo</button>
+        </div>
+      </div>
+      <button class="m-feedback-submit" data-i18n="fb_submit" onclick="submitMobileFeedback()">Submit Review</button>
+    </div>
+
+    <span class="section-label" style="margin-bottom:10px;display:block" data-i18n="social_title">Follow Us</span>
+    <div class="social-grid">
+      <a href="#" class="social-btn" id="mSocialInstagram" target="_blank" rel="noopener"><span class="social-btn-icon">📸</span><span class="social-btn-label">Instagram</span></a>
+      <a href="#" class="social-btn" id="mSocialFacebook"  target="_blank" rel="noopener"><span class="social-btn-icon">👥</span><span class="social-btn-label">Facebook</span></a>
+      <a href="#" class="social-btn" id="mSocialTiktok"    target="_blank" rel="noopener"><span class="social-btn-icon">🎵</span><span class="social-btn-label">TikTok</span></a>
+      <a href="#" class="social-btn" id="mSocialWhatsapp"  target="_blank" rel="noopener"><span class="social-btn-icon">💬</span><span class="social-btn-label">WhatsApp</span></a>
+    </div>
+
+    <button class="info-terms-link" data-i18n="info_terms_link" onclick="showTab('terms')">Terms &amp; Conditions →</button>
+
+    <a href="index.html" class="view-full-site" data-i18n="full_site">View Full Website ↗</a>
+
+  </div>
+</section>
+
+<!-- ════ SHOP ════ -->
+<section id="tab-shop" class="tab-section">
+
+  <div class="tab-hero">
+    <span class="section-label" data-i18n="shop_eyebrow">Shop With Us</span>
+    <h1 data-i18n="shop_h1">Our Products</h1>
+    <p data-i18n="shop_sub">Professional products to maintain your results at home</p>
+  </div>
+
+  <div class="shop-body">
+    <div class="shop-grid" id="mShopGrid"></div>
+    <p class="shop-enquire-hint" data-i18n="shop_hint">To purchase, <a href="mailto:hello@puppybeautybar.co.uk">email us</a> or enquire in studio.</p>
+  </div>
+
+</section>
+
+<!-- ════ T&Cs ════ -->
+<section id="tab-terms" class="tab-section">
+
+  <div class="tab-hero">
+    <span class="section-label" data-i18n="tc_eyebrow">Legal</span>
+    <h1 data-i18n="tc_h1">Terms &amp; Conditions</h1>
+    <p data-i18n="tc_sub">Tap any section to expand. By booking you agree to all policies below.</p>
+  </div>
+
+  <!-- Accordion rendered by renderTerms() from LANGS object -->
+  <div class="acc-list" id="accList"></div>
+
+  <p class="terms-footer" id="termsFooter"></p>
+
+</section>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-tab active" data-tab="home" onclick="showTab('home')">
+    <span class="tab-icon">🏠</span>
+    <span class="tab-label" data-i18n="nav_home">Home</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="nav-tab" data-tab="services" onclick="showTab('services')">
+    <span class="tab-icon">✨</span>
+    <span class="tab-label" data-i18n="nav_services">Services</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="nav-tab" data-tab="book" onclick="showTab('book')">
+    <span class="tab-icon">📅</span>
+    <span class="tab-label" data-i18n="nav_book">Book</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="nav-tab" data-tab="info" onclick="showTab('info')">
+    <span class="tab-icon">ℹ️</span>
+    <span class="tab-label" data-i18n="nav_info">Info</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="nav-tab" data-tab="shop" onclick="showTab('shop')">
+    <span class="tab-icon">🛍️</span>
+    <span class="tab-label" data-i18n="nav_shop">Shop</span>
+    <span class="tab-dot"></span>
+  </button>
+</nav>
+
+<script>
+// ══════════════════════════════════════════
+//  LANGUAGE / i18n
+// ══════════════════════════════════════════
+var TC_EMOJIS = ['📅','❌','⏰','💳','⚠️','🏥','📸','🔄','🧒','⚖️'];
+
+var LANGS = {
+  en: {
+    bookNow:'Book Now',
+    nav_home:'Home', nav_services:'Services', nav_book:'Book', nav_info:'Info', nav_shop:'Shop',
+    home_eyebrow:'Specialist Lash Studio',
+    home_sub:'Where eyes do the talking',
+    status_open:'Open now · Closes 5:00 PM',
+    status_closed:'Closed · Opens 10:00 AM',
+    qa_call:'Call', qa_book:'Book', qa_email:'Email',
+    home_svc_title:'Our Services',
+    home_see_all:'View All Services →',
+    home_reviews_title:'What Clients Say',
+    home_review_text:'"I got a hybrid set and I\'m absolutely obsessed. So full and fluffy yet still natural — my friends keep asking if they\'re real!"',
+    home_review_author:'— Sophie K. · Hybrid Extensions',
+    svc_eyebrow:'What We Offer', svc_h1:'Services',
+    svc_sub:'Tap any service to book instantly',
+    svc_label:'Lash Treatments', svc_count_suffix:'service', svc_book_btn:'Book →',
+    cs_badge:'Soon', cs_soon_label:'Coming Soon',
+    book_eyebrow:'Appointments', book_h1:'Book a Visit',
+    book_sub:'By appointment only · Open 7 days a week',
+    patch_alert:'',
+    fs_service:'Choose Service', lbl_service:'Service *', opt_select_service:'— Select a service —',
+    fs_datetime:'Date &amp; Time', lbl_date:'Preferred Date *', lbl_time:'Preferred Time *',
+    fs_details:'Your Details', lbl_first:'First Name *', lbl_last:'Last Name *',
+    lbl_phone:'Phone Number *', lbl_email:'Email Address *',
+    fs_extras:'Extras', lbl_notes:'Notes or questions (optional)',
+    ph_notes:'Allergies, special requests, questions…',
+    patch_check:'',
+    terms_check:'I agree to the <span style="color:var(--rose);font-weight:600;cursor:pointer" onclick="showTab(\'terms\')">Terms &amp; Conditions</span>.',
+    book_submit:'Request Appointment ✦',
+    book_note:'We\'ll confirm your booking within 24 hours via phone or email. Your appointment is not confirmed until you hear from us.',
+    success_icon:'✅', success_title:'Request Received!',
+    success_msg:'Thank you for booking with Puppy Beauty Bar.<br>We\'ll confirm your appointment within <strong>24 hours</strong> via phone or email.<br><br>Please remember: no contact lenses on the day, and arrive 5 minutes early.',
+    book_another:'Book Another →',
+    info_eyebrow:'Find Us', info_h1:'Info &amp; Contact', info_sub:'Everything you need to know',
+    hours_title:'Opening Hours', hours_days:'Monday – Sunday',
+    hours_appt:'🔔 By appointment only. The studio is unstaffed without a confirmed booking — please book in advance.',
+    contact_title:'Contact Us', lbl_phone_c:'Phone', lbl_email_c:'Email', lbl_address:'Address',
+    about_title:'About Us',
+    about_p1:'Puppy Beauty Bar is a dedicated specialist lash studio. We believe your eyes are your most expressive feature — and we\'re here to make them shine.',
+    about_p2:'We use only premium, skin-safe adhesives and materials, staying current with the latest techniques — all while keeping your comfort and safety first.',
+    social_title:'Follow Us', full_site:'View Full Website ↗',
+    fb_title:'Leave a Review',
+    fb_desc:'Share your experience — it\'ll be reviewed by our team before appearing on the site.',
+    lbl_fb_name:'Your Name *', lbl_fb_service:'Service *', lbl_fb_rating:'Your Rating *',
+    lbl_fb_comment:'Comment *', ph_fb_comment:'Tell us about your experience…',
+    fb_photo_lbl:'Photo (optional)', fb_photo_area:'Tap to add a photo',
+    fb_remove_photo:'Remove photo', fb_submit:'Submit Review',
+    fb_success_title:'Thank You!',
+    fb_success_msg:'Your review has been received and will be reviewed before publishing.',
+    fb_another:'Leave Another Review',
+    shop_eyebrow:'Shop With Us', shop_h1:'Our Products',
+    shop_sub:'Professional products to maintain your results at home',
+    shop_hint:'To purchase, <a href="mailto:hello@puppybeautybar.co.uk">email us</a> or enquire in studio.',
+    shop_no_items:'No products available yet.',
+    shop_enquire:'Enquire',
+    info_terms_link:'Terms &amp; Conditions →',
+    tc_eyebrow:'Legal', tc_h1:'Terms &amp; Conditions',
+    tc_sub:'Tap any section to expand. By booking you agree to all policies below.',
+    tc_1_title:'Bookings &amp; Appointments',
+    tc_1_body:'<ul><li>All appointments are by advance booking only. The studio is not staffed for walk-ins.</li><li>Bookings are confirmed within 24 hours. Not guaranteed until confirmed.</li><li>A valid UK phone number and email address must be provided when booking.</li><li>New clients will be asked to complete a consultation and health form.</li><li>We reserve the right to decline or reschedule bookings at our reasonable discretion.</li></ul>',
+    tc_2_title:'Cancellation Policy',
+    tc_2_body:'<ul><li><strong>48 hours\' notice</strong> required to cancel or reschedule without charge.</li><li>Cancellations within 48 hours may incur a <strong>50% cancellation fee</strong>.</li><li>No-shows will be charged <strong>100% of the service fee</strong>.</li><li>Repeated cancellations (3+) may require a deposit for future bookings.</li><li>If we cancel, you receive a full deposit refund.</li></ul>',
+    tc_3_title:'Arrival &amp; Late Policy',
+    tc_3_body:'<ul><li>Please arrive <strong>5 minutes early</strong> for your appointment.</li><li>Clients arriving <strong>15+ minutes late</strong> may have their service shortened or rescheduled at full charge.</li></ul>',
+    tc_4_title:'Payments &amp; Deposits',
+    tc_4_body:'<ul><li>All prices are in <strong>pounds sterling (£)</strong> including VAT where applicable.</li><li>We accept cash, card, Apple Pay, Google Pay, and bank transfer.</li><li>A deposit may be required for new clients or longer appointments.</li><li>Deposits are non-refundable if cancelled within 48 hours (Consumer Contracts Regulations 2013).</li></ul>',
+    tc_5_title:'Allergy &amp; Safety Policy',
+    tc_5_body:'<ul><li>By booking you confirm you have no known allergies to the products used and have disclosed any relevant medical conditions to the studio.</li><li>Puppy Beauty Bar accepts no liability for reactions arising from undisclosed allergies or medical conditions.</li><li>Lash services are not recommended during pregnancy. Consult your GP first.</li></ul>',
+    tc_6_title:'Health &amp; Safety',
+    tc_6_body:'<ul><li>We may refuse service if we have health or safety concerns.</li><li>Inform us of any recent eye surgery, infections, or medical procedures.</li><li><strong>Do not wear contact lenses</strong> during lash extension appointments. Bring glasses.</li><li>All tools are sanitised between clients per UK health standards.</li></ul>',
+    tc_7_title:'Photos &amp; Privacy (UK GDPR)',
+    tc_7_body:'<ul><li>Before/after photos may be taken with your explicit consent.</li><li>You may withdraw consent at any time.</li><li>Your data is processed under the <strong>UK GDPR</strong> and the Data Protection Act 2018.</li><li>We never sell or share your data without your consent.</li></ul>',
+    tc_8_title:'Aftercare, Redo &amp; Refunds',
+    tc_8_body:'<ul><li>Aftercare advice is provided after every service.</li><li>Notify us <strong>within 48 hours</strong> if dissatisfied.</li><li>We will offer a complimentary redo where appropriate.</li><li>Under the <strong>Consumer Rights Act 2015</strong>, you may request a redo if the service was not carried out with reasonable care and skill.</li></ul>',
+    tc_9_title:'Children &amp; Guests',
+    tc_9_body:'<ul><li>Children are not permitted unless they are the client receiving a service.</li><li>Guests must wait outside or in the designated waiting area.</li><li>We are not responsible for personal belongings left on the premises.</li></ul>',
+    tc_10_title:'Governing Law',
+    tc_10_body:'<ul><li>These terms are governed by the laws of <strong>England and Wales</strong>.</li><li>Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</li><li>These terms do not affect your statutory rights under UK consumer law.</li></ul>',
+    tc_footer:'Last updated April 2026. Questions? <a href="mailto:hello@puppybeautybar.co.uk">Email us</a>',
+    slot_select_date:'— Select Date First —', slot_select_time:'— Select Time —',
+    slot_no_avail:'— No Availability on This Date —',
+    opt_select_fb:'— Select —',
+    err_fields:'Please fill in all required fields.',
+    err_patch:'Please agree to the Terms & Conditions.',
+    err_fb_fields:'Please fill in your name, service, and comment.',
+    err_fb_rating:'Please select a star rating.',
+  },
+  'zh-s': {
+    bookNow:'立即预约',
+    nav_home:'首页', nav_services:'服务', nav_book:'预约', nav_info:'信息', nav_shop:'商店',
+    home_eyebrow:'专业睫毛工作室',
+    home_sub:'让眼睛尽情诉说',
+    status_open:'营业中 · 下午5:00结束',
+    status_closed:'已打烊 · 上午10:00开始',
+    qa_call:'电话', qa_book:'预约', qa_email:'邮件',
+    home_svc_title:'我们的服务',
+    home_see_all:'查看全部服务 →',
+    home_reviews_title:'客户评价',
+    home_review_text:'"做了混合款睫毛，我完全爱上了。既饱满蓬松，看起来又很自然——朋友们总问是不是我自己的！"',
+    home_review_author:'— Sophie K. · 混合款睫毛',
+    svc_eyebrow:'我们的项目', svc_h1:'服务',
+    svc_sub:'点击任意服务立即预约',
+    svc_label:'睫毛护理', svc_count_suffix:'项服务', svc_book_btn:'预约 →',
+    cs_badge:'即将', cs_soon_label:'即将推出',
+    svc_s1_name:'经典睫毛延伸',      svc_s1_desc:'每根天然睫毛贴一根延伸，打造经典优雅造型，适合日常佩戴。',
+    svc_s2_name:'发丝级睫毛延伸',    svc_s2_desc:'每根天然睫毛贴一束超细延伸睫毛，饱满蓬松，极具戏剧感，最大量却无沉重感。',
+    svc_s3_name:'混合款睫毛延伸',    svc_s3_desc:'经典与发丝级的完美结合——自然质感，细腻丰盈。',
+    svc_s4_name:'睫毛烫翘与染色',    svc_s4_desc:'不使用延伸，只烫翘天然睫毛并进行半永久染色，打造自然美目效果。',
+    svc_s5_name:'睫毛补缺',          svc_s5_desc:'每2-3周补一次，填充自然脱落。仅限现有客户。',
+    svc_s6_name:'光疗甲',            svc_s6_desc:'持久光疗甲，提供多种颜色选择。',
+    svc_s7_name:'美甲彩绘',          svc_s7_desc:'创意个性美甲彩绘，从简约到夸张风格皆可。',
+    svc_s8_name:'水晶甲延伸',        svc_s8_desc:'耐久亚克力延伸甲，可定制长度和造型。',
+    svc_s9_name:'经典修甲',          svc_s9_desc:'修形、去死皮，自选甲油颜色。',
+    book_eyebrow:'预约', book_h1:'预约到访',
+    book_sub:'仅限预约 · 每周7天开放',
+    patch_alert:'',
+    fs_service:'选择服务', lbl_service:'服务 *', opt_select_service:'— 请选择服务 —',
+    fs_datetime:'日期与时间', lbl_date:'首选日期 *', lbl_time:'首选时间 *',
+    fs_details:'您的信息', lbl_first:'名字 *', lbl_last:'姓氏 *',
+    lbl_phone:'手机号码 *', lbl_email:'电子邮件 *',
+    fs_extras:'其他', lbl_notes:'备注或问题（选填）',
+    ph_notes:'过敏史、特殊要求或问题…',
+    patch_check:'',
+    terms_check:'我同意<span style="color:var(--rose);font-weight:600;cursor:pointer" onclick="showTab(\'terms\')">条款与条件</span>。',
+    book_submit:'提交预约申请 ✦',
+    book_note:'我们将在24小时内通过电话或邮件确认您的预约，确认前预约尚未成立。',
+    success_icon:'✅', success_title:'申请已收到！',
+    success_msg:'感谢您预约 Puppy Beauty Bar。<br>我们将在<strong>24小时</strong>内通过电话或邮件确认。<br><br>温馨提示：当天请勿佩戴隐形眼镜，并提前5分钟到达。',
+    book_another:'再次预约 →',
+    info_eyebrow:'找到我们', info_h1:'信息与联系', info_sub:'您需要了解的一切',
+    hours_title:'营业时间', hours_days:'周一至周日',
+    hours_appt:'🔔 仅限预约。未经确认预约工作室无人值守——请提前预约。',
+    contact_title:'联系我们', lbl_phone_c:'电话', lbl_email_c:'邮件', lbl_address:'地址',
+    about_title:'关于我们',
+    about_p1:'Puppy Beauty Bar 是一家专业睫毛工作室。我们相信眼睛是您最富表现力的特征——我们在这里让它们绽放光彩。',
+    about_p2:'我们只使用优质、对皮肤安全的粘合剂和材料，掌握最新技术，始终将您的舒适与安全放在首位。',
+    social_title:'关注我们', full_site:'查看完整网站 ↗',
+    fb_title:'留下评价',
+    fb_desc:'分享您的体验——我们的团队审核后将发布于网站。',
+    lbl_fb_name:'您的姓名 *', lbl_fb_service:'服务 *', lbl_fb_rating:'您的评分 *',
+    lbl_fb_comment:'评论 *', ph_fb_comment:'告诉我们您的体验…',
+    fb_photo_lbl:'照片（选填）', fb_photo_area:'点击上传照片',
+    fb_remove_photo:'删除照片', fb_submit:'提交评价',
+    fb_success_title:'感谢！',
+    fb_success_msg:'您的评价已收到，审核后将发布于网站。',
+    fb_another:'再次评价',
+    shop_eyebrow:'美妆商店', shop_h1:'我们的产品',
+    shop_sub:'专业护理产品，居家延长美容效果',
+    shop_hint:'如需购买，请<a href="mailto:hello@puppybeautybar.co.uk">发送邮件</a>或到店咨询。',
+    shop_no_items:'暂无产品。',
+    shop_enquire:'咨询',
+    info_terms_link:'条款与条件 →',
+    tc_eyebrow:'法律', tc_h1:'条款与条件',
+    tc_sub:'点击展开。预约即表示您同意以下所有条款。',
+    tc_1_title:'预订与预约',
+    tc_1_body:'<ul><li>所有预约须提前预订，工作室不接受无预约到访。</li><li>预订在24小时内确认，确认前不作保证。</li><li>预订时须提供有效英国电话号码和电子邮件。</li><li>新客户须填写咨询及健康申报表。</li><li>我们保留合理拒绝或重新安排预约的权利。</li></ul>',
+    tc_2_title:'取消政策',
+    tc_2_body:'<ul><li>取消须提前<strong>48小时通知</strong>，否则免费。</li><li>48小时内取消可能产生<strong>50%取消费</strong>。</li><li>无故未到将收取<strong>100%服务费</strong>。</li><li>多次取消（3次以上）未来预约可能需支付定金。</li><li>如我方取消，您将获得全额定金退款。</li></ul>',
+    tc_3_title:'到达与迟到政策',
+    tc_3_body:'<ul><li>请提前<strong>5分钟</strong>到达。</li><li>迟到<strong>15分钟以上</strong>可能缩短服务或按原价重新安排。</li></ul>',
+    tc_4_title:'付款与定金',
+    tc_4_body:'<ul><li>所有价格以<strong>英镑（£）</strong>计算，含适用增值税。</li><li>接受现金、信用卡、Apple Pay、Google Pay及银行转账。</li><li>新客户或较长预约可能须支付定金。</li><li>48小时内取消的定金不予退还（2013年消费者合同条例）。</li></ul>',
+    tc_5_title:'过敏与安全政策',
+    tc_5_body:'<ul><li>预约即表示您已确认所使用产品无已知过敏反应，并已告知工作室相关病史。</li><li>因未披露过敏或医疗状况导致的反应，Puppy Beauty Bar 不承担责任。</li><li>孕期不建议进行睫毛服务，请先咨询医生。</li></ul>',
+    tc_6_title:'健康与安全',
+    tc_6_body:'<ul><li>如存在健康或安全顾虑，我们可能拒绝提供服务。</li><li>请告知近期眼部手术、感染或医疗程序。</li><li>睫毛延伸预约期间<strong>请勿佩戴隐形眼镜</strong>，请携带眼镜。</li><li>所有器具按英国卫生标准消毒。</li></ul>',
+    tc_7_title:'照片与隐私（英国GDPR）',
+    tc_7_body:'<ul><li>在征得您明确同意后，可能拍摄前后对比照片。</li><li>您可随时撤回同意。</li><li>您的数据依据<strong>英国GDPR</strong>及2018年数据保护法处理。</li><li>未经您同意，我们不会出售或共享您的数据。</li></ul>',
+    tc_8_title:'护理、返工与退款',
+    tc_8_body:'<ul><li>每次服务后均提供护理建议。</li><li>如不满意，请在<strong>48小时内</strong>通知我们。</li><li>我们将在适当情况下提供免费返工。</li><li>根据<strong>2015年消费者权益法</strong>，如服务未以合理技能完成，您可申请返工。</li></ul>',
+    tc_9_title:'儿童与访客',
+    tc_9_body:'<ul><li>除非儿童是接受服务的客户，否则不允许进入工作室。</li><li>访客须在外等候或指定等候区。</li><li>我们不对遗留在场所内的个人物品负责。</li></ul>',
+    tc_10_title:'适用法律',
+    tc_10_body:'<ul><li>本条款受<strong>英格兰和威尔士</strong>法律管辖。</li><li>争议受英格兰和威尔士法院的专属管辖。</li><li>本条款不影响您在英国消费者法律下的法定权利。</li></ul>',
+    tc_footer:'最后更新：2026年4月。如有疑问，请<a href="mailto:hello@puppybeautybar.co.uk">发送邮件</a>',
+    slot_select_date:'— 请先选择日期 —', slot_select_time:'— 请选择时间 —',
+    slot_no_avail:'— 该日期暂无可用时段 —',
+    opt_select_fb:'— 请选择 —',
+    err_fields:'请填写所有必填项。',
+    err_patch:'请同意条款与条件。',
+    err_fb_fields:'请填写姓名、服务及评论。',
+    err_fb_rating:'请选择星级评分。',
+  },
+  'zh-t': {
+    bookNow:'立即預約',
+    nav_home:'首頁', nav_services:'服務', nav_book:'預約', nav_info:'資訊', nav_shop:'商店',
+    home_eyebrow:'專業睫毛工作室',
+    home_sub:'讓眼睛盡情訴說',
+    status_open:'營業中 · 下午5:00結束',
+    status_closed:'已打烊 · 上午10:00開始',
+    qa_call:'電話', qa_book:'預約', qa_email:'郵件',
+    home_svc_title:'我們的服務',
+    home_see_all:'查看全部服務 →',
+    home_reviews_title:'客戶評價',
+    home_review_text:'"做了混合款睫毛，我完全愛上了。既飽滿蓬鬆，看起來又很自然——朋友們總問是不是我自己的！"',
+    home_review_author:'— Sophie K. · 混合款睫毛',
+    svc_eyebrow:'我們的項目', svc_h1:'服務',
+    svc_sub:'點擊任意服務立即預約',
+    svc_label:'睫毛護理', svc_count_suffix:'項服務', svc_book_btn:'預約 →',
+    cs_badge:'即將', cs_soon_label:'即將推出',
+    svc_s1_name:'經典睫毛延伸',      svc_s1_desc:'每根天然睫毛貼一根延伸，打造經典優雅造型，適合日常佩戴。',
+    svc_s2_name:'髮絲級睫毛延伸',    svc_s2_desc:'每根天然睫毛貼一束超細延伸睫毛，飽滿蓬鬆，極具戲劇感，最大量卻無沉重感。',
+    svc_s3_name:'混合款睫毛延伸',    svc_s3_desc:'經典與髮絲級的完美融合——自然質感，細膩豐盈。',
+    svc_s4_name:'睫毛燙翹與染色',    svc_s4_desc:'不使用延伸，只燙翹天然睫毛並進行半永久染色，打造自然美目效果。',
+    svc_s5_name:'睫毛補缺',          svc_s5_desc:'每2-3週補一次，填充自然脫落。僅限現有客戶。',
+    svc_s6_name:'光療甲',            svc_s6_desc:'持久光療甲，提供多種顏色選擇。',
+    svc_s7_name:'美甲彩繪',          svc_s7_desc:'創意個性美甲彩繪，從簡約到誇張風格皆可。',
+    svc_s8_name:'壓克力延伸甲',      svc_s8_desc:'耐久壓克力延伸甲，可定製長度和造型。',
+    svc_s9_name:'經典修甲',          svc_s9_desc:'修形、去死皮，自選甲油顏色。',
+    book_eyebrow:'預約', book_h1:'預約到訪',
+    book_sub:'僅限預約 · 每週7天開放',
+    patch_alert:'',
+    fs_service:'選擇服務', lbl_service:'服務 *', opt_select_service:'— 請選擇服務 —',
+    fs_datetime:'日期與時間', lbl_date:'首選日期 *', lbl_time:'首選時間 *',
+    fs_details:'您的資料', lbl_first:'名字 *', lbl_last:'姓氏 *',
+    lbl_phone:'手機號碼 *', lbl_email:'電子郵件 *',
+    fs_extras:'其他', lbl_notes:'備注或問題（選填）',
+    ph_notes:'過敏史、特殊要求或問題…',
+    patch_check:'',
+    terms_check:'我同意<span style="color:var(--rose);font-weight:600;cursor:pointer" onclick="showTab(\'terms\')">條款與條件</span>。',
+    book_submit:'提交預約申請 ✦',
+    book_note:'我們將在24小時內透過電話或郵件確認您的預約，確認前預約尚未成立。',
+    success_icon:'✅', success_title:'申請已收到！',
+    success_msg:'感謝您預約 Puppy Beauty Bar。<br>我們將在<strong>24小時</strong>內透過電話或郵件確認。<br><br>溫馨提示：當天請勿配戴隱形眼鏡，並提前5分鐘到達。',
+    book_another:'再次預約 →',
+    info_eyebrow:'找到我們', info_h1:'資訊與聯繫', info_sub:'您需要了解的一切',
+    hours_title:'營業時間', hours_days:'週一至週日',
+    hours_appt:'🔔 僅限預約。未經確認預約工作室無人值守——請提前預約。',
+    contact_title:'聯繫我們', lbl_phone_c:'電話', lbl_email_c:'郵件', lbl_address:'地址',
+    about_title:'關於我們',
+    about_p1:'Puppy Beauty Bar 是一家專業睫毛工作室。我們相信眼睛是您最富表現力的特徵——我們在這裡讓它們綻放光彩。',
+    about_p2:'我們只使用優質、對皮膚安全的黏合劑和材料，掌握最新技術，始終將您的舒適與安全放在首位。',
+    social_title:'關注我們', full_site:'查看完整網站 ↗',
+    fb_title:'留下評價',
+    fb_desc:'分享您的體驗——我們的團隊審核後將發布於網站。',
+    lbl_fb_name:'您的姓名 *', lbl_fb_service:'服務 *', lbl_fb_rating:'您的評分 *',
+    lbl_fb_comment:'評論 *', ph_fb_comment:'告訴我們您的體驗…',
+    fb_photo_lbl:'照片（選填）', fb_photo_area:'點擊上傳照片',
+    fb_remove_photo:'刪除照片', fb_submit:'提交評價',
+    fb_success_title:'感謝！',
+    fb_success_msg:'您的評價已收到，審核後將發布於網站。',
+    fb_another:'再次評價',
+    shop_eyebrow:'美妝商店', shop_h1:'我們的產品',
+    shop_sub:'專業護理產品，居家延長美容效果',
+    shop_hint:'如需購買，請<a href="mailto:hello@puppybeautybar.co.uk">發送郵件</a>或到店諮詢。',
+    shop_no_items:'暫無產品。',
+    shop_enquire:'諮詢',
+    info_terms_link:'條款與條件 →',
+    tc_eyebrow:'法律', tc_h1:'條款與條件',
+    tc_sub:'點擊展開。預約即表示您同意以下所有條款。',
+    tc_1_title:'預訂與預約',
+    tc_1_body:'<ul><li>所有預約須提前預訂，工作室不接受無預約到訪。</li><li>預訂在24小時內確認，確認前不作保證。</li><li>預訂時須提供有效英國電話號碼和電子郵件。</li><li>新客戶須填寫諮詢及健康申報表。</li><li>我們保留合理拒絕或重新安排預約的權利。</li></ul>',
+    tc_2_title:'取消政策',
+    tc_2_body:'<ul><li>取消須提前<strong>48小時通知</strong>，否則免費。</li><li>48小時內取消可能產生<strong>50%取消費</strong>。</li><li>無故未到將收取<strong>100%服務費</strong>。</li><li>多次取消（3次以上）未來預約可能需支付定金。</li><li>如我方取消，您將獲得全額定金退款。</li></ul>',
+    tc_3_title:'到達與遲到政策',
+    tc_3_body:'<ul><li>請提前<strong>5分鐘</strong>到達。</li><li>遲到<strong>15分鐘以上</strong>可能縮短服務或按原價重新安排。</li></ul>',
+    tc_4_title:'付款與定金',
+    tc_4_body:'<ul><li>所有價格以<strong>英鎊（£）</strong>計算，含適用增值稅。</li><li>接受現金、信用卡、Apple Pay、Google Pay及銀行轉賬。</li><li>新客戶或較長預約可能須支付定金。</li><li>48小時內取消的定金不予退還（2013年消費者合約條例）。</li></ul>',
+    tc_5_title:'過敏與安全政策',
+    tc_5_body:'<ul><li>預約即表示您已確認所使用產品無已知過敏反應，並已告知工作室相關病史。</li><li>因未披露過敏或醫療狀況導致的反應，Puppy Beauty Bar 不承擔責任。</li><li>孕期不建議進行睫毛服務，請先諮詢醫生。</li></ul>',
+    tc_6_title:'健康與安全',
+    tc_6_body:'<ul><li>如存在健康或安全顧慮，我們可能拒絕提供服務。</li><li>請告知近期眼部手術、感染或醫療程序。</li><li>睫毛延伸預約期間<strong>請勿配戴隱形眼鏡</strong>，請攜帶眼鏡。</li><li>所有器具按英國衛生標準消毒。</li></ul>',
+    tc_7_title:'照片與隱私（英國GDPR）',
+    tc_7_body:'<ul><li>在征得您明確同意後，可能拍攝前後對比照片。</li><li>您可隨時撤回同意。</li><li>您的數據依據<strong>英國GDPR</strong>及2018年數據保護法處理。</li><li>未經您同意，我們不會出售或共享您的數據。</li></ul>',
+    tc_8_title:'護理、返工與退款',
+    tc_8_body:'<ul><li>每次服務後均提供護理建議。</li><li>如不滿意，請在<strong>48小時內</strong>通知我們。</li><li>我們將在適當情況下提供免費返工。</li><li>根據<strong>2015年消費者權益法</strong>，如服務未以合理技能完成，您可申請返工。</li></ul>',
+    tc_9_title:'兒童與訪客',
+    tc_9_body:'<ul><li>除非兒童是接受服務的客戶，否則不允許進入工作室。</li><li>訪客須在外等候或指定等候區。</li><li>我們不對遺留在場所內的個人物品負責。</li></ul>',
+    tc_10_title:'適用法律',
+    tc_10_body:'<ul><li>本條款受<strong>英格蘭和威爾斯</strong>法律管轄。</li><li>爭議受英格蘭和威爾斯法院的專屬管轄。</li><li>本條款不影響您在英國消費者法律下的法定權利。</li></ul>',
+    tc_footer:'最後更新：2026年4月。如有疑問，請<a href="mailto:hello@puppybeautybar.co.uk">發送郵件</a>',
+    slot_select_date:'— 請先選擇日期 —', slot_select_time:'— 請選擇時間 —',
+    slot_no_avail:'— 該日期暫無可用時段 —',
+    opt_select_fb:'— 請選擇 —',
+    err_fields:'請填寫所有必填項。',
+    err_patch:'請同意條款與條件。',
+    err_fb_fields:'請填寫姓名、服務及評論。',
+    err_fb_rating:'請選擇星級評分。',
+  }
+};
+
+var currentLang = (function(){
+  try { return localStorage.getItem('ppb_lang') || 'en'; } catch(e){ return 'en'; }
+})();
+
+function T(key) { return (LANGS[currentLang] || LANGS.en)[key] || LANGS.en[key] || ''; }
+
+function setLang(lang) {
+  currentLang = lang;
+  try { localStorage.setItem('ppb_lang', lang); } catch(e){}
+  ['en','zh-s','zh-t'].forEach(function(l) {
+    var btn = document.getElementById('langBtn_' + l);
+    if (btn) btn.classList.toggle('active', l === lang);
+  });
+  // Update html lang attribute
+  var htmlLang = { 'en':'en', 'zh-s':'zh-Hans', 'zh-t':'zh-Hant' };
+  document.documentElement.lang = htmlLang[lang] || 'en';
+  // Apply all data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var val = T(el.dataset.i18n);
+    if (val !== undefined) el.innerHTML = val;
+  });
+  // Placeholders
+  var phMap = {
+    mBookNotes:'ph_notes', mFbComment:'ph_fb_comment'
+  };
+  Object.keys(phMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.placeholder = T(phMap[id]);
+  });
+  // Re-render dynamic sections
+  updateStatus();
+  initMobileServices();
+  initMobileFeedbackServices();
+  updateMobileTimeSlots();
+  renderTerms();
+  renderMobileProducts();
+  renderHomeMiniServices();
+  renderMobileContact();
+}
+
+function renderTerms() {
+  var list = document.getElementById('accList');
+  if (!list) return;
+  list.innerHTML = TC_EMOJIS.map(function(emoji, idx) {
+    var k = idx + 1;
+    return '<details class="acc-item">' +
+      '<summary class="acc-head">' +
+      '<span class="acc-emoji">' + emoji + '</span>' +
+      '<span class="acc-title">' + T('tc_' + k + '_title') + '</span>' +
+      '<svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>' +
+      '</summary>' +
+      '<div class="acc-body">' + T('tc_' + k + '_body') + '</div>' +
+      '</details>';
+  }).join('');
+  var footer = document.getElementById('termsFooter');
+  if (footer) footer.innerHTML = T('tc_footer');
+}
+
+// ── SERVICES (shared localStorage with main site) ──
+var MOBILE_DEFAULT_SERVICES = [
+  { id:'s1', emoji:'✨', name:'Classic Lash Extensions',  desc:'One extension per natural lash for a timeless, polished look. Perfect for everyday wear.',         price:'From £45', duration:'90–120 min',  status:'active' },
+  { id:'s2', emoji:'💫', name:'Volume Lash Extensions',   desc:'A fan of ultra-fine lashes per natural lash — full, fluffy and dramatic. Max volume, no heaviness.',price:'From £65', duration:'120–150 min', status:'active' },
+  { id:'s3', emoji:'🌸', name:'Hybrid Lash Extensions',   desc:'The perfect blend of classic and volume — natural texture with subtle fullness.',                   price:'From £55', duration:'100–130 min', status:'active' },
+  { id:'s4', emoji:'🪄', name:'Lash Lift & Tint',         desc:'Semi-permanent curl and tint on your natural lashes. No extensions — just beautifully lifted eyes.', price:'From £40', duration:'60–75 min',   status:'active' },
+  { id:'s5', emoji:'🔁', name:'Lash Infills',             desc:'Keep your set fresh. Top up every 2–3 weeks to fill natural shedding. Existing clients only.',       price:'From £30', duration:'45–75 min',   status:'active' },
+  { id:'s6', emoji:'💅', name:'Gel Nails',                desc:'Long-lasting gel polish in a wide range of colours.',                                                 price:'From £30', duration:'45–60 min',   status:'coming-soon' },
+  { id:'s7', emoji:'🎨', name:'Nail Art',                 desc:'Creative bespoke nail art — minimal to maximalist.',                                                   price:'From £40', duration:'60–90 min',   status:'coming-soon' },
+  { id:'s8', emoji:'💎', name:'Acrylic Extensions',       desc:'Durable acrylic extensions shaped to your preferred length and style.',                               price:'From £45', duration:'75–90 min',   status:'coming-soon' },
+  { id:'s9', emoji:'🌷', name:'Classic Manicure',         desc:'Shaping, cuticle care, and your choice of polish colour.',                                             price:'From £20', duration:'30–45 min',   status:'coming-soon' }
+];
+
+function mGetServices() {
+  try {
+    var s = localStorage.getItem('ppb_services');
+    return s ? JSON.parse(s) : MOBILE_DEFAULT_SERVICES;
+  } catch(e) { return MOBILE_DEFAULT_SERVICES; }
+}
+
+function mEsc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function initMobileServices() {
+  var services = mGetServices();
+  var active = services.filter(function(s){ return s.status === 'active'; });
+  var coming = services.filter(function(s){ return s.status === 'coming-soon'; });
+
+  // Service cards
+  var cardsEl = document.getElementById('mSvcCards');
+  var countEl = document.getElementById('mSvcCount');
+  if (cardsEl) {
+    cardsEl.innerHTML = active.map(function(s) {
+      var dn = T('svc_' + s.id + '_name') || s.name;
+      var dd = T('svc_' + s.id + '_desc') || s.desc;
+      return '<div class="svc-card" onclick="bookService(\'' + mEsc(s.name) + '\')">' +
+        '<div class="svc-card-top">' +
+          '<div class="svc-icon-circle">' + s.emoji + '</div>' +
+          '<div class="svc-meta">' +
+            '<div class="svc-name">' + mEsc(dn) + '</div>' +
+            '<div class="svc-timing">' + (s.duration ? '⏱ ' + mEsc(s.duration) : '') + '</div>' +
+          '</div>' +
+          '<div class="svc-price-badge">' + mEsc(s.price) + '</div>' +
+        '</div>' +
+        '<div class="svc-card-bottom">' +
+          '<p class="svc-desc">' + mEsc(dd) + '</p>' +
+          '<button class="svc-book-btn">' + T('svc_book_btn') + '</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  if (countEl) {
+    if (currentLang === 'en') {
+      countEl.textContent = active.length + ' ' + T('svc_count_suffix') + (active.length !== 1 ? 's' : '');
+    } else {
+      countEl.textContent = active.length + T('svc_count_suffix');
+    }
+  }
+
+  // Coming soon grid
+  var csWrap = document.getElementById('mComingSoonWrap');
+  var csGrid = document.getElementById('mComingSoonGrid');
+  if (csGrid) {
+    csGrid.innerHTML = coming.map(function(s) {
+      var dn = T('svc_' + s.id + '_name') || s.name;
+      return '<div class="cs-card">' +
+        '<span class="cs-card-emoji">' + s.emoji + '</span>' +
+        '<span class="cs-card-name">' + mEsc(dn) + '</span>' +
+        '<span class="cs-card-price">' + mEsc(s.price) + '</span>' +
+        '<span class="cs-badge">' + T('cs_badge') + '</span>' +
+      '</div>';
+    }).join('');
+  }
+  if (csWrap) csWrap.style.display = coming.length > 0 ? '' : 'none';
+
+  // Booking form dropdown
+  var sel = document.getElementById('mBookService');
+  if (sel) {
+    sel.innerHTML = '<option value="">' + T('opt_select_service') + '</option>' +
+      active.map(function(s) {
+        var dn = T('svc_' + s.id + '_name') || s.name;
+        return '<option value="' + mEsc(s.name) + '">' + mEsc(dn) + ' — ' + mEsc(s.price) + '</option>';
+      }).join('');
+  }
+}
+
+// ── TAB NAVIGATION ──
+function showTab(name) {
+  document.querySelectorAll('.tab-section').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  document.querySelectorAll('.nav-tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.tab === name);
+  });
+  var el = document.getElementById('tab-' + name);
+  if (el) el.classList.add('active');
+  // Refresh content whenever a tab is opened (picks up admin changes)
+  if (name === 'services' || name === 'book') initMobileServices();
+  if (name === 'shop') renderMobileProducts();
+  if (name === 'home') renderHomeMiniServices();
+  if (name === 'info') renderMobileContact();
+  window.scrollTo(0, 0);
+}
+
+// ── SERVICE PRE-SELECTION ──
+function bookService(serviceName) {
+  showTab('book');
+  var sel = document.getElementById('mBookService');
+  if (!sel) return;
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === serviceName) { sel.selectedIndex = i; break; }
+  }
+}
+
+// ── TIME SLOTS ──
+var ALL_SLOTS = [
+  '10:00 AM','10:30 AM','11:00 AM','11:30 AM',
+  '12:00 PM','12:30 PM','1:00 PM','1:30 PM',
+  '2:00 PM','2:30 PM','3:00 PM','3:30 PM',
+  '4:00 PM','4:30 PM'
+];
+
+function getAvailableSlots() {
+  try { return JSON.parse(localStorage.getItem('ppb_available_slots') || '{}'); }
+  catch(e) { return {}; }
+}
+
+var ALL_SLOTS_M = [
+  '9:00 AM','9:15 AM','9:30 AM','9:45 AM',
+  '10:00 AM','10:15 AM','10:30 AM','10:45 AM',
+  '11:00 AM','11:15 AM','11:30 AM','11:45 AM',
+  '12:00 PM','12:15 PM','12:30 PM','12:45 PM',
+  '1:00 PM','1:15 PM','1:30 PM','1:45 PM',
+  '2:00 PM','2:15 PM','2:30 PM','2:45 PM',
+  '3:00 PM','3:15 PM','3:30 PM','3:45 PM',
+  '4:00 PM','4:15 PM','4:30 PM','4:45 PM',
+  '5:00 PM','5:15 PM','5:30 PM','5:45 PM',
+];
+
+function parseDurMins(str) {
+  if (!str) return 60;
+  var lower = str.toLowerCase();
+  var hm = lower.match(/(\d+(?:\.\d+)?)\s*h(?:ou?r?s?)?/);
+  if (hm) { var mm = lower.match(/(\d+)\s*m(?:in)?/); return Math.round(parseFloat(hm[1])*60)+(mm?parseInt(mm[1]):0); }
+  var nums = (str.match(/\d+/g)||[]).map(Number);
+  return nums.length ? Math.max.apply(null, nums) : 60;
+}
+
+function updateMobileTimeSlots() {
+  var dateInput     = document.getElementById('mBookDate');
+  var timeSelect    = document.getElementById('mBookTime');
+  var serviceSelect = document.getElementById('mBookService');
+  var selectedDate  = dateInput ? dateInput.value : '';
+  if (!selectedDate) {
+    timeSelect.innerHTML = '<option value="">' + T('slot_select_date') + '</option>';
+    return;
+  }
+  // Get admin-enabled slots
+  var available  = getAvailableSlots();
+  var adminSlots = available[selectedDate] || [];
+  // Get booked slots and mark them as blocked
+  var bookedRaw  = localStorage.getItem('ppb_bookings');
+  var bookings   = (bookedRaw ? JSON.parse(bookedRaw) : []).filter(function(b){ return b.date === selectedDate; });
+  var blocked    = {};
+  bookings.forEach(function(b) {
+    var si = ALL_SLOTS_M.indexOf(b.time);
+    if (si < 0) return;
+    var n = Math.ceil((b.durationMins||60) / 15);
+    for (var i = si; i < si + n && i < ALL_SLOTS_M.length; i++) blocked[ALL_SLOTS_M[i]] = true;
+  });
+  // Get selected service duration
+  var durSlots = 1;
+  if (serviceSelect && serviceSelect.value) {
+    var svcsRaw = localStorage.getItem('ppb_services');
+    var svcs = svcsRaw ? JSON.parse(svcsRaw) : [];
+    var svcObj = svcs.find(function(s){ return s.name === serviceSelect.value; });
+    if (svcObj) durSlots = Math.ceil(parseDurMins(svcObj.duration || '60 min') / 15);
+  }
+  var adminSet = {};
+  adminSlots.forEach(function(s){ adminSet[s] = true; });
+  var slots = adminSlots.filter(function(s) {
+    if (blocked[s]) return false;
+    if (durSlots <= 1) return true;
+    var si = ALL_SLOTS_M.indexOf(s);
+    if (si + durSlots > ALL_SLOTS_M.length) return false;
+    for (var i = si + 1; i < si + durSlots; i++) {
+      if (!adminSet[ALL_SLOTS_M[i]] || blocked[ALL_SLOTS_M[i]]) return false;
+    }
+    return true;
+  });
+  if (slots.length === 0) {
+    timeSelect.innerHTML = '<option value="">' + T('slot_no_avail') + '</option>';
+    return;
+  }
+  timeSelect.innerHTML = '<option value="">' + T('slot_select_time') + '</option>';
+  slots.forEach(function(slot) {
+    var opt = document.createElement('option');
+    opt.value = slot; opt.textContent = slot;
+    timeSelect.appendChild(opt);
+  });
+}
+
+// Set min date to tomorrow
+(function() {
+  var d = document.getElementById('mBookDate');
+  if (!d) return;
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  d.min = tomorrow.toISOString().split('T')[0];
+})();
+
+// ── FORM SUBMIT ──
+function submitMobileBooking(e) {
+  e.preventDefault();
+  var service = document.getElementById('mBookService').value;
+  var date    = document.getElementById('mBookDate').value;
+  var time    = document.getElementById('mBookTime').value;
+  var first   = document.getElementById('mBookFirst').value.trim();
+  var last    = (document.getElementById('mBookLast') ? document.getElementById('mBookLast').value.trim() : '');
+  var phone   = document.getElementById('mBookPhone').value.trim();
+  var email   = document.getElementById('mBookEmail').value.trim();
+  var notes   = (document.getElementById('mBookNotes') ? document.getElementById('mBookNotes').value.trim() : '');
+  var terms   = document.getElementById('mBookTerms').checked;
+
+  if (!service || !date || !time || !first || !last || !phone || !email) {
+    alert(T('err_fields'));
+    return;
+  }
+  var _emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!_emailRe.test(email)) { alert('Please enter a valid email address.'); return; }
+  if (!terms) { alert(T('err_patch')); return; }
+
+  // Save booking to shared localStorage so desktop admin sees it and slots get blocked
+  try {
+    var stored = localStorage.getItem('ppb_bookings');
+    var bookings = stored ? JSON.parse(stored) : [];
+    // Determine service duration
+    var svcsRaw = localStorage.getItem('ppb_services');
+    var svcs = svcsRaw ? JSON.parse(svcsRaw) : [];
+    var svcObj = svcs.find(function(s){ return s.name === service; });
+    var durStr = svcObj ? (svcObj.duration || '60 min') : '60 min';
+    var durMins = (function(str){
+      var lower = str.toLowerCase();
+      var hm = lower.match(/(\d+(?:\.\d+)?)\s*h(?:ou?r?s?)?/);
+      if (hm) { var mm = lower.match(/(\d+)\s*m(?:in)?/); return Math.round(parseFloat(hm[1])*60)+(mm?parseInt(mm[1]):0); }
+      var nums = (str.match(/\d+/g)||[]).map(Number);
+      return nums.length ? Math.max.apply(null,nums) : 60;
+    })(durStr);
+    bookings.push({
+      id: 'bm' + Date.now(), date: date, time: time,
+      serviceName: service, durationMins: durMins,
+      firstName: first, lastName: last,
+      email: email, phone: phone, notes: notes,
+      paymentMethod: 'Pending (Mobile Request)', paymentId: '',
+      timestamp: Date.now()
+    });
+    localStorage.setItem('ppb_bookings', JSON.stringify(bookings));
+  } catch(err) { /* non-fatal — proceed with success screen */ }
+
+  document.getElementById('mBookFormWrap').style.display = 'none';
+  document.getElementById('mBookSuccess').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function resetMobileBooking() {
+  document.getElementById('mBookForm').reset();
+  document.getElementById('mBookFormWrap').style.display = '';
+  document.getElementById('mBookSuccess').style.display = 'none';
+  updateMobileTimeSlots();
+  window.scrollTo(0, 0);
+}
+
+// ── OPEN / CLOSED STATUS ──
+function updateStatus() {
+  var mins = new Date().getHours() * 60 + new Date().getMinutes();
+  var open = mins >= 600 && mins < 1020;
+  var dot  = document.getElementById('statusDot');
+  var txt  = document.getElementById('statusText');
+  if (!dot || !txt) return;
+  if (open) {
+    dot.classList.remove('closed');
+    txt.textContent = T('status_open');
+  } else {
+    dot.classList.add('closed');
+    txt.textContent = T('status_closed');
+  }
+}
+updateStatus();
+setInterval(updateStatus, 60000);
+
+// ── MOBILE FEEDBACK ──
+var mFbRatingVal = 0;
+var mFbPhotoData = null;
+
+function setMobileRating(val) {
+  mFbRatingVal = val;
+  document.querySelectorAll('.m-star-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i < val);
+  });
+}
+
+function handleMobileFbPhoto(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var maxPx = 800, w = img.width, h = img.height;
+      if (w > maxPx || h > maxPx) {
+        if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
+        else       { w = Math.round(w * maxPx / h); h = maxPx; }
+      }
+      var c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      mFbPhotoData = c.toDataURL('image/jpeg', 0.72);
+      document.getElementById('mFbPhotoImg').src = mFbPhotoData;
+      document.getElementById('mFbPhotoPreview').style.display = '';
+      document.getElementById('mFbPhotoArea').style.display    = 'none';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearMobileFbPhoto() {
+  mFbPhotoData = null;
+  document.getElementById('mFbPhoto').value = '';
+  document.getElementById('mFbPhotoPreview').style.display = 'none';
+  document.getElementById('mFbPhotoArea').style.display    = '';
+}
+
+function submitMobileFeedback() {
+  var name    = (document.getElementById('mFbName').value || '').trim();
+  var service = document.getElementById('mFbService').value;
+  var comment = (document.getElementById('mFbComment').value || '').trim();
+  if (!name || !service || !comment) { alert(T('err_fb_fields')); return; }
+  if (!mFbRatingVal) { alert(T('err_fb_rating')); return; }
+  var pending = [];
+  try { var s = localStorage.getItem('ppb_feedback_pending'); pending = s ? JSON.parse(s) : []; } catch(e) {}
+  pending.push({
+    id: 'r' + Date.now(), name: name, service: service, rating: mFbRatingVal, comment: comment,
+    photo: mFbPhotoData || null,
+    date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }),
+    timestamp: Date.now()
+  });
+  try { localStorage.setItem('ppb_feedback_pending', JSON.stringify(pending)); }
+  catch(e) { alert('Could not save review — storage may be full.'); return; }
+  document.getElementById('mFbFormWrap').style.display = 'none';
+  document.getElementById('mFbSuccess').style.display  = 'block';
+}
+
+function resetMobileFeedback() {
+  mFbRatingVal = 0; mFbPhotoData = null;
+  document.getElementById('mFbName').value    = '';
+  document.getElementById('mFbService').value = '';
+  document.getElementById('mFbComment').value = '';
+  document.getElementById('mFbPhoto').value   = '';
+  document.querySelectorAll('.m-star-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('mFbPhotoPreview').style.display = 'none';
+  document.getElementById('mFbPhotoArea').style.display    = '';
+  document.getElementById('mFbFormWrap').style.display = '';
+  document.getElementById('mFbSuccess').style.display  = 'none';
+}
+
+// Populate feedback service dropdown from same services list
+function initMobileFeedbackServices() {
+  var services = mGetServices();
+  var active = services.filter(function(s) { return s.status === 'active'; });
+  var sel = document.getElementById('mFbService');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">' + T('opt_select_fb') + '</option>' +
+    active.map(function(s) {
+      var dn = T('svc_' + s.id + '_name') || s.name;
+      return '<option value="' + mEsc(s.name) + '">' + mEsc(dn) + '</option>';
+    }).join('');
+}
+
+// ── PRODUCTS ──
+var MOBILE_DEFAULT_PRODUCTS = [
+  { id:'pp1', emoji:'💕', name:'Lash Foam Cleanser',          cat:'Aftercare',    price:'£12.00', badge:'Best Seller', hidden:false },
+  { id:'pp2', emoji:'🪮', name:'Lash Spoolie Set',             cat:'Tools',        price:'£6.00',  badge:'',            hidden:false },
+  { id:'pp3', emoji:'✨', name:'Lash Sealant Coating',         cat:'Aftercare',    price:'£18.00', badge:'New',          hidden:false },
+  { id:'pp4', emoji:'🌸', name:'Oil-Free Eye Makeup Remover',  cat:'Aftercare',    price:'£10.00', badge:'',            hidden:false },
+  { id:'pp5', emoji:'💎', name:'Lash Extension Primer',        cat:'Professional', price:'£14.00', badge:'',            hidden:false },
+  { id:'pp6', emoji:'🎁', name:'Lash Care Gift Set',           cat:'Gift Sets',    price:'£32.00', badge:'Gift',         hidden:false },
+];
+
+function mGetProducts() {
+  try { var s = localStorage.getItem('ppb_products'); return s ? JSON.parse(s) : MOBILE_DEFAULT_PRODUCTS; }
+  catch(e) { return MOBILE_DEFAULT_PRODUCTS; }
+}
+
+function renderMobileProducts() {
+  var grid = document.getElementById('mShopGrid');
+  if (!grid) return;
+  var products = mGetProducts().filter(function(p) { return !p.hidden; });
+  if (products.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--mid);padding:32px 0">' + T('shop_no_items') + '</p>';
+    return;
+  }
+  grid.innerHTML = products.map(function(p) {
+    var isGold = p.badge === 'New' || p.badge === 'Gift';
+    return '<div class="m-product-card">' +
+      (p.badge ? '<span class="m-product-badge' + (isGold ? ' badge-gold' : '') + '">' + mEsc(p.badge) + '</span>' : '') +
+      '<div class="m-product-img">' + p.emoji + '</div>' +
+      '<div class="m-product-body">' +
+        '<span class="m-product-cat">' + mEsc(p.cat) + '</span>' +
+        '<div class="m-product-name">' + mEsc(p.name) + '</div>' +
+        '<div class="m-product-footer">' +
+          '<span class="m-product-price">' + mEsc(p.price) + '</span>' +
+          '<button class="m-product-btn" onclick="mEnquireProduct(\'' + p.id + '\')">' + T('shop_enquire') + '</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function mEnquireProduct(id) {
+  var prods = mGetProducts();
+  var p = null;
+  for (var i = 0; i < prods.length; i++) { if (prods[i].id === id) { p = prods[i]; break; } }
+  if (!p) return;
+  var subject = encodeURIComponent('Product Enquiry: ' + p.name);
+  var body    = encodeURIComponent('Hi,\n\nI\'m interested in purchasing: ' + p.name + ' (' + p.price + ').\n\nPlease let me know about availability.\n\nThank you!');
+  window.location.href = 'mailto:hello@puppybeautybar.co.uk?subject=' + subject + '&body=' + body;
+}
+
+// ── HOME MINI SERVICES (dynamic, reads from localStorage) ──
+function renderHomeMiniServices() {
+  var container = document.getElementById('mHomeSvcList');
+  if (!container) return;
+  var active = mGetServices().filter(function(s) { return s.status === 'active'; }).slice(0, 3);
+  container.innerHTML = active.map(function(s) {
+    var dn = T('svc_' + s.id + '_name') || s.name;
+    return '<div class="mini-svc" onclick="bookService(\'' + mEsc(s.name) + '\')">' +
+      '<span class="mini-svc-emoji">' + s.emoji + '</span>' +
+      '<span class="mini-svc-name">' + mEsc(dn) + '</span>' +
+      '<span class="mini-svc-price">' + mEsc(s.price) + '</span>' +
+    '</div>';
+  }).join('');
+}
+
+// ── CONTACT INFO (reads from ppb_contact saved by admin panel) ──
+function mGetContact() {
+  var defaults = {
+    phone:'+447456347231', email:'cline.studio.limited@gmail.com',
+    address:'', city:'',
+    instagram:'https://www.instagram.com/puppybeautybarbirmingham?igsh=MWdoOXpwcHp2eGt2NQ%3D%3D&utm_source=qr',
+    facebook:'', tiktok:'', whatsapp:'+447456347231'
+  };
+  try {
+    var s = localStorage.getItem('ppb_contact');
+    if (!s) return defaults;
+    var saved = JSON.parse(s);
+    return {
+      phone:     saved.phone     || defaults.phone,
+      email:     saved.email     || defaults.email,
+      address:   saved.address   !== undefined ? saved.address   : defaults.address,
+      city:      saved.city      !== undefined ? saved.city      : defaults.city,
+      instagram: saved.instagram || defaults.instagram,
+      facebook:  saved.facebook  || defaults.facebook,
+      tiktok:    saved.tiktok    || defaults.tiktok,
+      whatsapp:  saved.whatsapp  || defaults.whatsapp
+    };
+  } catch(e) { return defaults; }
+}
+
+function renderMobileContact() {
+  var c = mGetContact();
+  var phoneEl   = document.getElementById('mContactPhone');
+  var phoneItem = document.getElementById('mContactPhoneItem');
+  var emailEl   = document.getElementById('mContactEmail');
+  var emailItem = document.getElementById('mContactEmailItem');
+  var addrEl    = document.getElementById('mContactAddress');
+  if (phoneEl)   phoneEl.textContent = c.phone || '';
+  if (phoneItem) phoneItem.href = 'tel:' + (c.phone || '').replace(/\s/g, '');
+  if (emailEl)   emailEl.textContent = c.email || '';
+  if (emailItem) emailItem.href = 'mailto:' + (c.email || '');
+  if (addrEl) {
+    var addr = [c.address, c.city].filter(Boolean).join(', ');
+    addrEl.textContent = addr || '[Your Salon Address]';
+  }
+  var ig = document.getElementById('mSocialInstagram');
+  var fb = document.getElementById('mSocialFacebook');
+  var tt = document.getElementById('mSocialTiktok');
+  var wa = document.getElementById('mSocialWhatsapp');
+  if (ig) ig.href = c.instagram || '#';
+  if (fb) fb.href = c.facebook  || '#';
+  if (tt) tt.href = c.tiktok    || '#';
+  if (wa) {
+    var waNum = (c.whatsapp || '').replace(/[\s\-()]/g, '');
+    wa.href = waNum ? 'https://wa.me/' + waNum : '#';
+  }
+}
+
+// ── CROSS-TAB SYNC: pick up admin panel changes made in another browser tab ──
+window.addEventListener('storage', function(e) {
+  if (e.key === 'ppb_services') {
+    initMobileServices();
+    initMobileFeedbackServices();
+    renderHomeMiniServices();
+  } else if (e.key === 'ppb_products') {
+    renderMobileProducts();
+  } else if (e.key === 'ppb_contact') {
+    renderMobileContact();
+  }
+});
+
+// Initialise all dynamic content in the saved language
+setLang(currentLang);
+</script>
+</body>
+</html>

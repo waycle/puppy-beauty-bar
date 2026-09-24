@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#c8706a"/>
+  <title>Puppy Beauty Bar – Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rose:      #c8706a;
+      --rose-lt:   #e8a09a;
+      --rose-pale: #fdf0ef;
+      --gold:      #c9a96e;
+      --dark:      #1a1a1a;
+      --mid:       #5a5a5a;
+      --light:     #f8f5f3;
+      --white:     #ffffff;
+      --r:         12px;
+    }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--dark);
+      background: var(--light);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    p { color: var(--mid); }
+
+    /* ===== HEADER ===== */
+    .doc-header {
+      background: linear-gradient(135deg, #2a1a1a 0%, #3d2020 50%, #2a1a2a 100%);
+      padding: 40px 24px 36px;
+      text-align: center;
+      position: relative;
+    }
+    .doc-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c8706a' fill-opacity='0.07'%3E%3Cpath d='M20 20v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-16V0h-2v4H14v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .doc-header-inner { position: relative; z-index: 1; }
+    .header-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .doc-header h1 {
+      color: var(--white);
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+    .doc-header h1 em { color: var(--rose-lt); font-style: italic; }
+    .header-sub { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+    .header-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .pill.gold { background: rgba(201,169,110,0.2); border-color: rgba(201,169,110,0.3); color: var(--gold); }
+
+    /* ===== QUICK BAR ===== */
+    .quick-bar {
+      background: var(--rose);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 8px;
+    }
+    .quick-bar a {
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+    }
+    .quick-bar a span:first-child { font-size: 1.1rem; }
+
+    /* ===== SECTIONS ===== */
+    .doc-section { padding: 24px 20px; }
+    .doc-section + .doc-section { border-top: 1px solid #ece5e2; }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .doc-section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .doc-section p { font-size: 0.9rem; line-height: 1.7; }
+
+    /* ===== HOURS BOX ===== */
+    .hours-box {
+      background: var(--dark);
+      border-radius: var(--r);
+      padding: 20px;
+      color: var(--white);
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.9rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row span:last-child { color: var(--rose-lt); font-weight: 600; }
+    .appt-note {
+      margin-top: 14px;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: var(--gold);
+      line-height: 1.5;
+    }
+
+    /* ===== SERVICE CARDS ===== */
+    .service-list { display: flex; flex-direction: column; gap: 12px; }
+    .service-item {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 3px solid var(--rose);
+    }
+    .service-emoji { font-size: 1.6rem; flex-shrink: 0; }
+    .service-info { flex: 1; }
+    .service-info h3 { font-size: 0.95rem; margin-bottom: 2px; }
+    .service-info p { font-size: 0.8rem; line-height: 1.5; color: var(--mid); }
+    .service-price-tag {
+      font-weight: 700;
+      color: var(--rose);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ===== COMING SOON ===== */
+    .coming-soon-list { display: flex; flex-direction: column; gap: 10px; }
+    .cs-item {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.65;
+      border-left: 3px solid var(--gold);
+    }
+    .cs-item h3 { font-size: 0.9rem; margin-bottom: 0; }
+    .cs-badge {
+      margin-left: auto;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ===== BOOKING INFO ===== */
+    .booking-steps { display: flex; flex-direction: column; gap: 12px; }
+    .booking-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      background: var(--rose);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text h3 { font-size: 0.9rem; margin-bottom: 2px; }
+    .step-text p { font-size: 0.82rem; line-height: 1.5; }
+
+    .patch-alert {
+      background: #fff8e8;
+      border: 1px solid #f0d98a;
+      border-radius: var(--r);
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      color: #7a6000;
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+    .patch-alert strong { display: block; margin-bottom: 4px; }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-block { padding: 0 20px 4px; }
+    .cta-btn {
+      display: block;
+      background: var(--rose);
+      color: var(--white);
+      text-align: center;
+      padding: 16px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 24px rgba(200,112,106,0.3);
+      transition: background 0.2s;
+    }
+    .cta-btn:active { background: #b55d57; }
+
+    /* ===== T&Cs ===== */
+    .tc-list { display: flex; flex-direction: column; gap: 2px; }
+    .tc-item {
+      background: var(--white);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .tc-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+    }
+    .tc-toggle:active { background: var(--rose-pale); }
+    .tc-emoji { font-size: 1.1rem; flex-shrink: 0; }
+    .tc-title { font-size: 0.88rem; font-weight: 600; color: var(--dark); flex: 1; }
+    .tc-arrow {
+      font-size: 0.75rem;
+      color: var(--mid);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .tc-item.open .tc-arrow { transform: rotate(90deg); }
+    .tc-body {
+      display: none;
+      padding: 0 16px 14px 44px;
+    }
+    .tc-item.open .tc-body { display: block; }
+    .tc-body ul { list-style: none; }
+    .tc-body ul li {
+      font-size: 0.82rem;
+      color: var(--mid);
+      padding: 5px 0;
+      border-bottom: 1px solid #f5f0ee;
+      line-height: 1.55;
+    }
+    .tc-body ul li:last-child { border-bottom: none; }
+
+    /* ===== CONTACT ===== */
+    .contact-list { display: flex; flex-direction: column; gap: 10px; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+    }
+    .contact-row span:first-child { font-size: 1.2rem; flex-shrink: 0; }
+    .contact-row a { color: var(--rose); font-weight: 500; }
+
+    /* ===== FOOTER ===== */
+    .doc-footer {
+      background: var(--dark);
+      padding: 24px 20px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .doc-footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    .doc-footer a { color: var(--rose-lt); font-weight: 500; }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { max-width: 100%; background: white; font-size: 11pt; }
+      .quick-bar, .cta-block, .doc-footer { display: none; }
+      .tc-body { display: block !important; }
+      .tc-arrow { display: none; }
+      .doc-header { background: #2a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-header-inner">
+      <p class="header-tag">Specialist Lash Studio</p>
+      <h1>Puppy <em>Beauty Bar</em></h1>
+      <p class="header-sub">Where eyes do the talking</p>
+      <div class="header-pills">
+        <span class="pill">🕐 10:00 AM – 5:00 PM</span>
+        <span class="pill">📅 7 Days a Week</span>
+        <span class="pill gold">By Appointment Only</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- QUICK BAR -->
+  <div class="quick-bar">
+    <a href="tel:+44000000000">
+      <span>📞</span>
+      <span>Call Us</span>
+    </a>
+    <a href="mailto:info@puppybeautybar.co.uk">
+      <span>📧</span>
+      <span>Email</span>
+    </a>
+    <a href="index.html#booking">
+      <span>📅</span>
+      <span>Book Now</span>
+    </a>
+    <a href="#terms">
+      <span>📋</span>
+      <span>T&amp;Cs</span>
+    </a>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="doc-section">
+    <span class="section-label">What We Offer</span>
+    <h2>Lash Services</h2>
+    <div class="service-list">
+      <div class="service-item">
+        <span class="service-emoji">✨</span>
+        <div class="service-info">
+          <h3>Classic Lash Extensions</h3>
+          <p>One extension per natural lash — timeless and polished.</p>
+        </div>
+        <span class="service-price-tag">From £45</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">💫</span>
+        <div class="service-info">
+          <h3>Volume Lash Extensions</h3>
+          <p>Fan of ultra-fine lashes per natural lash — full and dramatic.</p>
+        </div>
+        <span class="service-price-tag">From £65</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🌸</span>
+        <div class="service-info">
+          <h3>Hybrid Lash Extensions</h3>
+          <p>Classic + volume blend — natural yet lush.</p>
+        </div>
+        <span class="service-price-tag">From £55</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🪄</span>
+        <div class="service-info">
+          <h3>Lash Lift &amp; Tint</h3>
+          <p>Curl and tint your natural lashes. No extensions needed.</p>
+        </div>
+        <span class="service-price-tag">From £40</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🔁</span>
+        <div class="service-info">
+          <h3>Lash Infills</h3>
+          <p>Top-up every 2–3 weeks to keep your set looking fresh.</p>
+        </div>
+        <span class="service-price-tag">From £30</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="doc-section" style="background:#fffdf9">
+    <span class="section-label">Coming Soon</span>
+    <h2>Nail Services</h2>
+    <p style="margin-bottom:14px;font-size:0.88rem">We're expanding! Nail treatments launching very soon.</p>
+    <div class="coming-soon-list">
+      <div class="cs-item">
+        <span style="font-size:1.4rem">💅</span>
+        <h3>Gel Nails — From £30</h3>
+        <span class="cs-badge">Soon</span>
+      </div>
+      <div class="cs-item">
+        <span style="font-size:1.4rem">🎨</span>
+        <h3>Nail Art — From £40</h3>
+        <span class="cs-badge">Soon</span>
+      </div>
+      <div class="cs-item">
+        <span style="font-size:1.4rem">💎</span>
+        <h3>Acrylic Extensions — From £45</h3>
+        <span class="cs-badge">Soon</span>
+      </div>
+      <div class="cs-item">
+        <span style="font-size:1.4rem">🌷</span>
+        <h3>Classic Manicure — From £20</h3>
+        <span class="cs-badge">Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOURS -->
+  <div class="doc-section">
+    <span class="section-label">Opening Hours</span>
+    <h2>When We're Open</h2>
+    <div class="hours-box">
+      <div class="hours-row">
+        <span>Monday – Sunday</span>
+        <span>10:00 AM – 5:00 PM</span>
+      </div>
+      <div class="appt-note">
+        🔔 <strong style="color:var(--gold)">By appointment only.</strong> The studio is unstaffed unless a booking is confirmed. Please book in advance.
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO BOOK -->
+  <div class="doc-section">
+    <span class="section-label">Booking</span>
+    <h2>How to Book</h2>
+    <div class="booking-steps">
+      <div class="booking-step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Choose your service</h3>
+          <p>Browse our services above and pick the treatment you'd like.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Book online or call us</h3>
+          <p>Use the booking form on our website, or give us a call to arrange your slot.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>We confirm within 24 hours</h3>
+          <p>You'll receive a confirmation via email or phone. Your appointment is not confirmed until you hear from us.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h3>Arrive on time &amp; enjoy</h3>
+          <p>Please arrive 5 minutes early. Sit back, relax, and let us do the rest.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Patch test alert removed; allergy confirmation handled in T&Cs -->
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <a href="index.html#booking" class="cta-btn">Book an Appointment ✦</a>
+  </div>
+
+  <!-- TERMS -->
+  <div class="doc-section" id="terms">
+    <span class="section-label">Policies</span>
+    <h2>Terms &amp; Conditions</h2>
+    <p style="font-size:0.85rem;margin-bottom:16px">Tap each section to expand. By booking with us, you agree to all policies below.</p>
+    <div class="tc-list">
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">📅</span>
+          <span class="tc-title">Bookings &amp; Appointments</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>All appointments are by advance booking only. The studio is not staffed for walk-ins.</li>
+            <li>Bookings are confirmed within 24 hours. Your appointment is not guaranteed until confirmed.</li>
+            <li>A valid UK phone number and email address must be provided when booking.</li>
+            <li>New clients will be asked to complete a consultation and health declaration form.</li>
+            <li>We reserve the right to decline or reschedule bookings at our reasonable discretion.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">❌</span>
+          <span class="tc-title">Cancellation Policy</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li><strong>48 hours' notice</strong> required to cancel or reschedule without charge.</li>
+            <li>Cancellations within 48 hours may incur a <strong>50% cancellation fee</strong>.</li>
+            <li>No-shows without notice will be charged <strong>100% of the service fee</strong>.</li>
+            <li>Repeated cancellations (3+) may require a non-refundable deposit for future bookings.</li>
+            <li>If we cancel your appointment, you will receive a full deposit refund.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">⏰</span>
+          <span class="tc-title">Arrival &amp; Late Policy</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>Please arrive <strong>5 minutes early</strong> for your appointment.</li>
+            <li>Clients arriving more than <strong>15 minutes late</strong> may have their service shortened or rescheduled at full charge.</li>
+            <li>As a by-appointment studio, late arrivals may impact other clients.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">💳</span>
+          <span class="tc-title">Payments &amp; Deposits</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>All prices are in <strong>pounds sterling (£)</strong>.</li>
+            <li>We accept cash, credit/debit card, Apple Pay, Google Pay, and bank transfer.</li>
+            <li>A deposit may be required for new clients or longer appointments.</li>
+            <li>Deposits are non-refundable if cancelled within the 48-hour window (Consumer Contracts Regulations 2013).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">⚠️</span>
+          <span class="tc-title">Allergy &amp; Safety Policy</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>By booking you confirm you have no known allergies to the products used and have disclosed any relevant medical conditions to the studio.</li>
+            <li>Puppy Beauty Bar accepts no liability for reactions arising from undisclosed allergies or medical conditions.</li>
+            <li>Lash services are not recommended during pregnancy. Consult your GP first.</li>
+          </ul>
+          <div id="tcAllergyClause"></div>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">🏥</span>
+          <span class="tc-title">Health &amp; Safety</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>We may refuse service if we have health or safety concerns.</li>
+            <li>Inform us of any recent eye surgery, infections, or medical procedures.</li>
+            <li>Do <strong>not wear contact lenses</strong> during lash extension appointments.</li>
+            <li>All tools and materials are sanitised between clients per UK health standards.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">📸</span>
+          <span class="tc-title">Photos &amp; Privacy (UK GDPR)</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>Before/after photos may be taken for portfolio use. Your consent will always be sought.</li>
+            <li>You may decline or withdraw consent at any time.</li>
+            <li>Your data is processed under the <strong>UK GDPR</strong> and Data Protection Act 2018.</li>
+            <li>We never sell or share your data with third parties without consent.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">🔄</span>
+          <span class="tc-title">Aftercare, Redo &amp; Refunds</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>Aftercare advice is provided after every service. Not following it may affect results.</li>
+            <li>Notify us within <strong>48 hours</strong> if you are unsatisfied.</li>
+            <li>We will offer a complimentary redo where appropriate, subject to assessment.</li>
+            <li>Under the <strong>Consumer Rights Act 2015</strong>, you may request a redo if the service was not carried out with reasonable care and skill.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">🧒</span>
+          <span class="tc-title">Children &amp; Guests</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>Children are not permitted in the studio unless they are the client receiving a service.</li>
+            <li>Guests accompanying clients must wait outside or in the designated waiting area.</li>
+            <li>Puppy Beauty Bar is not responsible for personal belongings left on the premises.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tc-item">
+        <button class="tc-toggle" onclick="toggleTC(this)">
+          <span class="tc-emoji">⚖️</span>
+          <span class="tc-title">Governing Law</span>
+          <span class="tc-arrow">▶</span>
+        </button>
+        <div class="tc-body">
+          <ul>
+            <li>These Terms &amp; Conditions are governed by the laws of <strong>England and Wales</strong>.</li>
+            <li>Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</li>
+            <li>These terms do not affect your statutory rights under UK consumer law.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:0.78rem;color:var(--mid);margin-top:16px;text-align:center">Last updated: April 2026</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="doc-section">
+    <span class="section-label">Get In Touch</span>
+    <h2>Contact Us</h2>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span>📍</span>
+          <span>[Your Salon Address], [City, Postcode]</span>
+      </div>
+      <div class="contact-row">
+        <span>📞</span>
+          <a href="tel:+447456347231">+44 7456 347231</a>
+      </div>
+      <div class="contact-row">
+        <span>📧</span>
+          <a href="mailto:cline.studio.limited@gmail.com">cline.studio.limited@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span>📸</span>
+          <a href="https://www.instagram.com/puppybeautybarbirmingham?igsh=MWdoOXpwcHp2eGt2NQ%3D%3D&utm_source=qr">@puppybeautybarbirmingham on Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <p><strong style="color:rgba(255,255,255,0.7)">Puppy Beauty Bar</strong></p>
+    <p>Specialist Lash Studio &nbsp;·&nbsp; By Appointment Only</p>
+    <p style="margin-top:10px"><a href="index.html">Visit our full website ↗</a></p>
+    <p style="margin-top:10px">&copy; 2026 Puppy Beauty Bar. All rights reserved.</p>
+  </div>
+
+  <script>
+    function toggleTC(btn) {
+      const item = btn.closest('.tc-item');
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Puppy Beauty Bar – Specialist Lash Studio</title>
+  <meta name="description" content="Puppy Beauty Bar — specialist lash studio offering classic, volume and hybrid extensions, lash lift &amp; tint. Book online today."/>
+  <meta property="og:type"         content="website"/>
+  <meta property="og:title"        content="Puppy Beauty Bar – Specialist Lash Studio"/>
+  <meta property="og:description"  content="Precision lash services tailored to you — classic, volume &amp; hybrid extensions, lash lift &amp; tint. Book your appointment now."/>
+  <meta property="og:image"        content="og-image.jpg"/>
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:title"       content="Puppy Beauty Bar – Specialist Lash Studio"/>
+  <meta name="twitter:description" content="Precision lash services tailored to you — by appointment only."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#EF6E9A"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="Puppy Beauty Bar"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">Puppy Beauty Bar</a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#membership">Membership</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#faq">FAQs</a></li>
+        <li><a href="#terms">T&amp;Cs</a></li>
+        <li><a href="#booking" class="btn-nav">Book Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-top">
+      <span class="mobile-logo">Puppy Beauty Bar</span>
+      <button class="menu-x" onclick="closeMenu()" aria-label="Close menu">✕</button>
+    </div>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#gallery" onclick="closeMenu()">Gallery</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#products" onclick="closeMenu()">Shop</a>
+    <a href="#membership" onclick="closeMenu()">Membership</a>
+    <a href="#testimonials" onclick="closeMenu()">Reviews</a>
+    <a href="#feedback" onclick="closeMenu()">Feedback</a>
+    <a href="#faq" onclick="closeMenu()">FAQs</a>
+    <a href="#terms" onclick="closeMenu()">T&amp;Cs</a>
+    <a href="mobile.html" onclick="closeMenu()" class="mobile-menu-pill">📱 Mobile Version</a>
+    <a href="#booking" onclick="closeMenu()" class="mobile-book-btn">Book Now ✦</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-sparkles" aria-hidden="true">
+      <span class="sp sp1">✦</span>
+      <span class="sp sp2">✦</span>
+      <span class="sp sp3">✦</span>
+      <span class="sp sp4">✦</span>
+      <span class="sp sp5">✦</span>
+      <span class="sp sp6">✦</span>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tag">Specialist Lash Studio</p>
+      <h1>Where Eyes<br/><em>Do the Talking</em></h1>
+      <p class="hero-sub">Precision lash services tailored to you — by appointment only.</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn-primary">Book an Appointment</a>
+        <a href="#services" class="btn-ghost">Explore Services</a>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span>✦ By Appointment Only — Book Online or Call Ahead</span>
+      <span>✦ Open 7 Days a Week &nbsp;·&nbsp; 10:00 AM – 5:00 PM</span>
+      <span>✦ Gift Vouchers Available</span>
+      <!-- Patch test notice removed from site strip -->
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">What We Offer</p>
+        <h2>Our Services</h2>
+        <p class="section-sub">Expertly crafted lash treatments to suit every style and occasion.</p>
+      </div>
+      <!-- Populated dynamically by script.js from localStorage -->
+      <div class="services-grid" id="servicesGrid"></div>
+
+      <!-- COMING SOON — shown only when coming-soon services exist -->
+      <div class="coming-soon-section" id="comingSoonSection">
+        <div class="coming-soon-header">
+          <span class="coming-soon-label">Coming Soon</span>
+          <h3>More Services</h3>
+          <p>We're expanding! New treatments will be launching very soon.</p>
+        </div>
+        <div class="services-grid coming-soon-grid" id="comingSoonGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Our Work</p>
+        <h2>Lash Transformations</h2>
+        <p class="section-sub">Real results from real clients — every set tells a story.</p>
+      </div>
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All <span class="filter-count" id="cnt-all">9</span></button>
+        <button class="filter-btn" data-filter="extensions">Extensions <span class="filter-count" id="cnt-extensions">6</span></button>
+        <button class="filter-btn" data-filter="lift">Lash Lift &amp; Tint <span class="filter-count" id="cnt-lift">3</span></button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item" data-cat="extensions" onclick="openLightbox(0)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#d4a5a5,#c4846d)">
+            <div class="gallery-placeholder">✨<br/>Classic<br/>Extensions</div>
+          </div>
+          <div class="gallery-overlay"><span>Classic Extensions</span></div>
+        </div>
+        <div class="gallery-item" data-cat="extensions" onclick="openLightbox(1)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#b5c4e0,#8fa5c9)">
+            <div class="gallery-placeholder">💫<br/>Volume<br/>Lashes</div>
+          </div>
+          <div class="gallery-overlay"><span>Volume Lashes</span></div>
+        </div>
+        <div class="gallery-item gallery-large" data-cat="extensions" onclick="openLightbox(2)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#e8c4b8,#d4906c)">
+            <div class="gallery-placeholder">🌟<br/>Hybrid<br/>Set</div>
+          </div>
+          <div class="gallery-overlay"><span>Hybrid Set</span></div>
+        </div>
+        <div class="gallery-item" data-cat="lift" onclick="openLightbox(3)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#f4c2c2,#e89b9b)">
+            <div class="gallery-placeholder">🪄<br/>Lash<br/>Lift</div>
+          </div>
+          <div class="gallery-overlay"><span>Lash Lift</span></div>
+        </div>
+        <div class="gallery-item" data-cat="extensions" onclick="openLightbox(4)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#c8e6c9,#88c98a)">
+            <div class="gallery-placeholder">🌸<br/>Natural<br/>Set</div>
+          </div>
+          <div class="gallery-overlay"><span>Natural Classic Set</span></div>
+        </div>
+        <div class="gallery-item" data-cat="lift" onclick="openLightbox(5)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#f5e6d3,#e4c4a0)">
+            <div class="gallery-placeholder">✦<br/>Lash<br/>Tint</div>
+          </div>
+          <div class="gallery-overlay"><span>Lash Tint</span></div>
+        </div>
+        <div class="gallery-item gallery-tall" data-cat="extensions" onclick="openLightbox(6)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#e8d5e8,#c4a0c4)">
+            <div class="gallery-placeholder">💜<br/>Russian<br/>Volume</div>
+          </div>
+          <div class="gallery-overlay"><span>Russian Volume</span></div>
+        </div>
+        <div class="gallery-item" data-cat="extensions" onclick="openLightbox(7)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#ffd6cc,#ffb3a0)">
+            <div class="gallery-placeholder">✨<br/>Wispy<br/>Lashes</div>
+          </div>
+          <div class="gallery-overlay"><span>Wispy Style</span></div>
+        </div>
+        <div class="gallery-item" data-cat="lift" onclick="openLightbox(8)">
+          <div class="gallery-img" style="background:linear-gradient(135deg,#d4c5b0,#b8a088)">
+            <div class="gallery-placeholder">🌿<br/>Lift &amp;<br/>Tint</div>
+          </div>
+          <div class="gallery-overlay"><span>Lift &amp; Tint</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-prev" onclick="event.stopPropagation();changeSlide(-1)">&#8592;</button>
+    <div class="lb-content" onclick="event.stopPropagation()">
+      <div class="lb-img" id="lbImg"></div>
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+    <button class="lb-next" onclick="event.stopPropagation();changeSlide(1)">&#8594;</button>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container about-grid">
+      <div class="about-img-wrap">
+        <div class="about-img-placeholder">
+          <div class="about-blob"></div>
+          <div class="about-img-inner">
+            <span>🌸</span>
+            <p>Your photo<br/>goes here</p>
+          </div>
+        </div>
+        <div class="about-badge">
+          <strong>5★</strong>
+          <span>Rated<br/>Studio</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-tag">Our Story</p>
+        <h2>Lashes Are Our<br/>Passion &amp; Craft</h2>
+        <p>Puppy Beauty Bar is a dedicated specialist lash studio. We believe your eyes are your most expressive feature — and we're here to make them shine. Our lash artist combines technical precision with a genuine passion for making every client feel their absolute best.</p>
+        <p>We use only premium, skin-safe adhesives and lash materials, staying current with the latest techniques — all while keeping your comfort, safety, and satisfaction at the heart of everything we do.</p>
+        <div class="about-stats">
+          <div class="stat"><strong>500+</strong><span>Happy Clients</span></div>
+          <div class="stat"><strong>5★</strong><span>Rated Studio</span></div>
+          <div class="stat"><strong>Appt</strong><span>Only Salon</span></div>
+        </div>
+        <a href="#booking" class="btn-primary">Meet Us in Person</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="section section-pink">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Shop With Us</p>
+        <h2>Our Products</h2>
+        <p class="section-sub">Professional-grade products to extend and maintain your results at home.</p>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+      <p class="product-enquire-hint">To purchase, <a href="mailto:hello@puppybeautybar.co.uk">email us</a> or enquire in studio.</p>
+      <div id="giftVoucherCallout" class="gift-voucher-callout"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section section-pink">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Kind Words</p>
+        <h2>What Our Clients Say</h2>
+      </div>
+      <!-- Populated dynamically by script.js from localStorage -->
+      <div class="testimonials-grid"></div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP EVENTS -->
+  <section id="membership" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Events</p>
+        <h2>Membership Events</h2>
+        <p class="section-sub">Events and special offers for our clients. Membership enrolment is available after your first attended booking; discounts and event access can be applied at your first purchase — speak to staff to apply.</p>
+      </div>
+      <div class="membership-grid" id="membershipGrid" style="display:none"></div>
+      <div id="membershipEvents" style="display:block"></div>
+      <p class="membership-footer-note">Questions about events? <a href="mailto:hello@puppybeautybar.co.uk" class="membership-footer-link">Contact us</a>.</p>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Share Your Experience</p>
+        <h2>Leave a Review</h2>
+        <p class="section-sub">We'd love to hear about your visit. Your feedback helps us improve and reach more clients.</p>
+      </div>
+      <div class="feedback-wrap">
+        <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="fbName" placeholder="Jane Smith" required/>
+            </div>
+            <div class="form-group">
+              <label>Service Received *</label>
+              <select id="fbService" required>
+                <option value="">— Select a Service —</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Your Rating *</label>
+            <div class="star-picker" id="fbRating">
+              <button type="button" class="star-btn" onclick="setFeedbackRating(1)">★</button>
+              <button type="button" class="star-btn" onclick="setFeedbackRating(2)">★</button>
+              <button type="button" class="star-btn" onclick="setFeedbackRating(3)">★</button>
+              <button type="button" class="star-btn" onclick="setFeedbackRating(4)">★</button>
+              <button type="button" class="star-btn" onclick="setFeedbackRating(5)">★</button>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Your Comment *</label>
+            <textarea id="fbComment" rows="4" placeholder="Tell us about your experience…" required></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Photo (optional)</label>
+            <div class="file-upload-area" id="fbPhotoArea" onclick="document.getElementById('fbPhoto').click()">
+              <span class="file-upload-hint">Click to upload a photo of your results</span>
+              <input type="file" id="fbPhoto" accept="image/*" style="display:none" onchange="handleFeedbackPhoto(this)"/>
+            </div>
+            <div id="fbPhotoPreview" style="display:none">
+              <img id="fbPhotoImg" src="" alt="Preview" style="max-width:200px;border-radius:10px;margin-top:10px;display:block"/>
+              <button type="button" onclick="clearFeedbackPhoto()" style="margin-top:6px;background:none;border:none;color:var(--pink);font-size:.82rem;cursor:pointer;padding:0;font-weight:600">Remove photo</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary btn-full">Submit Review</button>
+        </form>
+        <div id="feedbackSuccess" style="display:none" class="booking-success">
+          <div class="success-icon">✓</div>
+          <h3>Thank You for Your Feedback!</h3>
+          <p>Your review has been received and will appear on our website once approved by the team.</p>
+          <button onclick="resetFeedbackForm()" class="btn-outline">Leave Another Review</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Reserve Your Spot</p>
+        <h2>Book an Appointment</h2>
+        <p class="section-sub">Fill in your details and we'll confirm your booking within 24 hours.</p>
+      </div>
+      <div class="booking-wrap" id="bookingWrap">
+        <div class="booking-info">
+          <div class="bi-row">
+            <span class="bi-icon">🕐</span>
+            <div>
+              <h3>Studio Hours</h3>
+              <p class="bi-hours" id="infoHours">Mon–Sun: 10:00 AM – 5:00 PM</p>
+              <p class="hours-note">By appointment only. No walk-ins.</p>
+            </div>
+          </div>
+          <div class="bi-divider"></div>
+          <div class="bi-row">
+            <span class="bi-icon">📞</span>
+            <div><p id="infoPhone">[Your Phone Number]</p></div>
+          </div>
+          <div class="bi-row">
+            <span class="bi-icon">📧</span>
+            <div><p id="infoEmail">[Your Email Address]</p></div>
+          </div>
+          <div class="bi-row">
+            <span class="bi-icon">📍</span>
+            <div><p id="infoAddress">[Your Salon Address]</p></div>
+          </div>
+          <div class="bi-divider"></div>
+          <div class="social-links">
+            <a href="#" class="social-btn" id="socialInstagram">Instagram</a>
+            <a href="#" class="social-btn" id="socialFacebook">Facebook</a>
+            <a href="#" class="social-btn" id="socialTikTok">TikTok</a>
+          </div>
+          <div id="contactQrWrap" style="display:none;margin-top:12px;gap:10px;align-items:center"></div>
+          <div id="contactMapWrap" style="display:none">
+            <div class="bi-divider"></div>
+            <div class="map-embed-wrap">
+              <iframe id="contactMapFrame" src="" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-right">
+          <!-- Step indicator -->
+          <div class="booking-steps" id="bookingSteps">
+            <div class="booking-step active" id="bStep1Ind">
+              <div class="step-num">1</div>
+              <div class="step-label">Your Details</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="booking-step" id="bStep2Ind">
+              <div class="step-num">2</div>
+              <div class="step-label">Payment</div>
+            </div>
+          </div>
+
+          <form class="booking-form" id="bookingForm" onsubmit="return false">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" id="bookingFirstName" placeholder="Jane" required/>
+              </div>
+              <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" id="bookingLastName" placeholder="Smith" required/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="bookingPhone" placeholder="+44 7700 900000" required/>
+              </div>
+              <div class="form-group">
+                <label>Email Address *</label>
+                <input type="email" id="bookingEmail" placeholder="jane@email.com" required/>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label>Service *</label>
+              <select required id="bookingServiceSelect" onchange="updateTimeSlots()">
+                <option value="">— Select a Service —</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Preferred Date *</label>
+                <input type="date" required id="bookingDate" onchange="updateTimeSlots()"/>
+              </div>
+              <div class="form-group">
+                <label>Preferred Time *</label>
+                <select required id="bookingTime">
+                  <option value="">— Select Date First —</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label>Additional Notes</label>
+              <textarea id="bookingNotes" placeholder="Tell us about your lash history, allergies, or anything else we should know…" rows="4"></textarea>
+            </div>
+            <!-- Patch test notice removed (site now records allergy confirmation in T&Cs) -->
+            <div class="form-check">
+              <input type="checkbox" id="termsCheck" required/>
+              <label for="termsCheck">I have read and agree to the <a href="#terms">Terms &amp; Conditions</a> and <a href="#terms">Cancellation Policy</a>.</label>
+            </div>
+            <button type="button" class="btn-primary btn-full" onclick="goToPaymentStep()">Continue to Payment →</button>
+          </form>
+
+          <!-- STEP 2: PAYMENT -->
+          <div class="booking-payment" id="bookingPayment" style="display:none">
+            <!-- Booking summary -->
+            <div class="pay-summary">
+              <h3>Booking Summary</h3>
+              <div class="pay-summary-row"><span>Name</span><strong id="paySummaryName"></strong></div>
+              <div class="pay-summary-row"><span>Service</span><strong id="paySummaryService"></strong></div>
+              <div class="pay-summary-row"><span>Date &amp; Time</span><strong id="paySummaryDateTime"></strong></div>
+            </div>
+
+            <!-- Deposit notice -->
+            <div class="pay-deposit-notice">
+              <span class="pay-deposit-amount" id="payDepositDisplay">£10</span>
+              <div>
+                <strong>Booking Deposit</strong>
+                <p>A deposit is required to secure your appointment. The remaining balance is settled at the studio on the day.</p>
+              </div>
+            </div>
+
+            <!-- Promo code -->
+            <div class="promo-row">
+              <input type="text" id="promoInput" class="promo-input" placeholder="Promo code (optional)" autocomplete="off" maxlength="30"/>
+              <button type="button" class="admin-btn admin-btn-edit" style="padding:11px 18px;border-radius:10px" onclick="applyPromoCode()">Apply</button>
+            </div>
+            <div id="promoMsg" class="promo-msg"></div>
+
+            <!-- Demo mode notice (hidden in production) -->
+            <div id="demoModeNotice" class="demo-mode-notice" style="display:none">
+              <strong>Demo Mode</strong> — No payment will be charged. Configure Stripe in Admin → Settings to take live payments.
+            </div>
+
+            <!-- Payment method tabs -->
+            <div class="pay-method-tabs">
+              <button class="pay-method-tab active" id="payTab_card" onclick="selectPaymentMethod('card')">
+                💳 &nbsp;Card
+              </button>
+              <button class="pay-method-tab" id="payTab_wechat" onclick="selectPaymentMethod('wechat')">
+                💚 &nbsp;WeChat Pay
+              </button>
+            </div>
+
+            <!-- Card panel -->
+            <div id="payPanel_card" class="pay-panel">
+              <label class="stripe-label">Card Details</label>
+              <div id="stripe-card-element" class="stripe-card-element"></div>
+              <div id="stripe-card-errors" class="stripe-error" role="alert"></div>
+              <p class="pay-security-note">🔒 Payments secured by Stripe. Card details are encrypted end-to-end.</p>
+              <button class="btn-primary btn-full" id="payCardBtn" onclick="processCardPayment()">Pay £10 Deposit</button>
+            </div>
+
+            <!-- WeChat Pay panel -->
+            <div id="payPanel_wechat" class="pay-panel" style="display:none">
+              <div class="wechat-pay-wrap">
+                <p class="wechat-scan-hint">Scan the QR code below to pay your deposit</p>
+                <div class="wechat-qr-wrap" id="wechatQrWrap"></div>
+                <p class="wechat-steps">
+                  1. Open WeChat &rarr; tap <strong>+</strong> &rarr; <strong>Scan</strong><br/>
+                  2. Scan the QR code above<br/>
+                  3. Enter the deposit amount and complete payment<br/>
+                  4. Tap the button below once done
+                </p>
+                <button class="btn-primary btn-full" id="payWechatBtn" onclick="processWechatPayment()">I've Completed Payment ✓</button>
+              </div>
+            </div>
+
+            <button class="back-to-details-btn" onclick="backToBookingDetails()">← Back to Details</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-success" id="bookingSuccess" style="display:none">
+        <div class="success-icon">✓</div>
+        <h3>Booking Confirmed!</h3>
+        <p id="bookingSuccessMsg">Thank you! Your deposit has been received and your appointment is confirmed. A confirmation email is on its way.</p>
+        <div class="cal-btns" id="calBtns" style="display:none"></div>
+        <div class="referral-note">
+          <span>💕</span>
+          <p>Love your lashes? Tell a friend — when they book, ask them to mention your name and we'll reward you both with a little thank-you discount!</p>
+        </div>
+        <button onclick="resetForm()" class="btn-outline" style="margin-top:16px">Book Another Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patch test section removed per admin request -->
+
+  <!-- FAQ -->
+  <section id="faq" class="section faq-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Got Questions?</p>
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know before your appointment.</p>
+      </div>
+      <div class="accordion">
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">⏳</span>
+            <span class="acc-title">How long do lash extensions last?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Lash extensions typically last <strong>2–4 weeks</strong> depending on your natural lash cycle and aftercare.</li>
+              <li>We recommend infill appointments every <strong>2–3 weeks</strong> to keep your lashes looking full and fresh.</li>
+              <li>With proper aftercare, your extensions can last closer to the 4-week mark before a full set is needed.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+            <summary class="acc-head">
+              <span class="acc-emoji">🩺</span>
+              <span class="acc-title">Allergy & Safety Information</span>
+              <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>By booking with Puppy Beauty Bar you confirm you have no known allergies to products used, and you have disclosed any relevant medical conditions to the studio.</li>
+                <li>Puppy Beauty Bar accepts no liability for reactions arising from undisclosed allergies or medical conditions.</li>
+              </ul>
+              <div id="tcAllergyClause"></div>
+            </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">✨</span>
+            <span class="acc-title">What's the difference between Classic, Hybrid, and Volume lashes?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li><strong>Classic:</strong> One extension per natural lash — ideal for a natural, defined look.</li>
+              <li><strong>Hybrid:</strong> A mix of classic and volume fans — perfect for subtle fullness with a natural base.</li>
+              <li><strong>Volume:</strong> Multiple ultra-fine extensions fanned onto each lash — creates a dramatic, glamorous finish.</li>
+              <li>Not sure which is right for you? Mention your ideal look in your booking notes and we'll advise.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">🛁</span>
+            <span class="acc-title">How do I prepare for my appointment?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Wash your hair and shower <strong>before</strong> your appointment — you'll need to avoid water for 12 hours afterwards.</li>
+              <li>Arrive with a <strong>clean, makeup-free face</strong> — no eye makeup, foundation, or mascara.</li>
+              <li>Wearing <strong>contact lenses</strong> is recommended to reduce eye sensitivity during the treatment.</li>
+              <li>Avoid caffeine and stimulants beforehand if you find it hard to keep your eyes still for long periods.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">💧</span>
+            <span class="acc-title">What aftercare do I need to follow?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Avoid water, steam, and sweat for the first <strong>12 hours</strong> after your appointment.</li>
+              <li>Use only <strong>oil-free</strong> skincare and makeup around the eye area — oil breaks down the adhesive.</li>
+              <li>Brush your lashes gently with a clean spoolie each morning.</li>
+              <li>Avoid rubbing your eyes or sleeping face-down. A silk pillowcase helps prolong your set.</li>
+              <li>We sell professional aftercare products in studio to help you maintain your lashes at home.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">💄</span>
+            <span class="acc-title">Can I wear makeup with lash extensions?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Yes — but use <strong>oil-free</strong> products only. Oil-based makeup will dissolve the lash adhesive.</li>
+              <li>Avoid waterproof mascara, which is very difficult to remove without damaging extensions.</li>
+              <li>If you do wear mascara, apply it only to the <strong>tips</strong> (not roots) and use a water-based formula.</li>
+              <li>Use an oil-free makeup remover and be gentle around the eye area when cleansing.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">🔒</span>
+            <span class="acc-title">Are lash extensions safe?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Yes — when applied by a trained technician using professional-grade materials, lash extensions are safe.</li>
+              <li>We use only <strong>skin-safe adhesives</strong> and premium lash materials, sanitised between every client.</li>
+              <li>Please disclose any eye conditions, recent surgery, or medical procedures before your appointment.</li>
+              <li>If you have known allergies or sensitivities, please let us know before treatment so we can advise appropriately.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">❓</span>
+            <span class="acc-title">How do I book, and what is the deposit for?</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Book online using the <a href="#booking" style="color:var(--pink);font-weight:600">Book Now</a> form — choose your service, date, and time.</li>
+              <li>A <strong>£10 deposit</strong> is required to secure your appointment. It is deducted from your final balance.</li>
+              <li>The deposit is non-refundable for late cancellations (less than 24 hours) or no-shows.</li>
+              <li>You'll receive a confirmation within 24 hours. For any questions, contact us directly.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS -->
+  <section id="terms" class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Policies</p>
+        <h2>Terms &amp; Conditions</h2>
+        <p class="section-sub">Tap any section to expand. Please read carefully before booking.</p>
+      </div>
+
+      <div class="accordion">
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">📅</span>
+            <span class="acc-title">Bookings &amp; Appointments</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>All appointments are by advance booking only. The studio is not staffed for walk-ins.</li>
+              <li>A <strong>£10 deposit per person</strong> is required to secure your booking. Your appointment is confirmed once the deposit is received.</li>
+              <li>Bookings are confirmed within 24 hours via email or phone. Not guaranteed until confirmed.</li>
+              <li>A valid phone number and email address must be provided at the time of booking.</li>
+              <li>New clients will be asked to complete a consultation and health declaration form.</li>
+              <li>We reserve the right to decline or reschedule bookings at our reasonable discretion.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">❌</span>
+            <span class="acc-title">Cancellation Policy</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>To reschedule, please notify us at least <strong>24 hours in advance</strong>. We will do our best to accommodate you.</li>
+              <li>Any changes made <strong>within 24 hours</strong> of the appointment will require a new deposit. The original deposit will be forfeited.</li>
+              <li>Cancellations or arriving <strong>more than 20 minutes late</strong> will result in the deposit being <strong>non-refundable ❌</strong>.</li>
+              <li>Arriving <strong>more than 30 minutes late</strong> will be treated as an automatic cancellation — the deposit will not be refunded ⏰❌.</li>
+              <li>If we cancel your appointment, you will receive a full refund of any deposit paid.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">⏰</span>
+            <span class="acc-title">Appointment Guidelines — Please Read Carefully</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>1️⃣ Please <strong>wash your hair and shower beforehand</strong>. After the lash appointment, avoid contact with water for <strong>12 hours 🛁🚫</strong>.</li>
+              <li>2️⃣ Please arrive <strong>without makeup</strong> (including foundation and eye makeup). A clean, makeup-free face gives the best results.</li>
+              <li>3️⃣ <strong>Wearing contact lenses is recommended</strong> to help reduce eye sensitivity and discomfort 👀.</li>
+              <li>4️⃣ If you are <strong>more than 20 minutes late</strong> or cancel at short notice, the deposit will be <strong>non-refundable ❌</strong>.</li>
+              <li>5️⃣ To reschedule, please notify us at least <strong>24 hours in advance</strong>. We will do our best to accommodate you.</li>
+              <li>6️⃣ Arriving <strong>more than 30 minutes late</strong> will be considered an automatic cancellation — the deposit will not be refunded ⏰❌.</li>
+            </ul>
+            <p style="margin-top:12px;font-size:.84rem;background:var(--pink-pale);border-radius:8px;padding:10px 14px;color:var(--dark)">
+              ⚠️ <strong>Important:</strong> Any changes made within 24 hours of your appointment will require a new deposit. The original deposit will be forfeited. Thank you for your understanding — we look forward to providing you with a pleasant and relaxing experience. 💖
+            </p>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">💳</span>
+            <span class="acc-title">Payments &amp; Deposits</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>All prices are in <strong>pounds sterling (£)</strong> and include VAT where applicable.</li>
+              <li>We accept cash, credit/debit card, and bank transfer.</li>
+              <li>A <strong>£10 deposit per person</strong> is required at the time of booking to secure your appointment.</li>
+              <li>The deposit is <strong>non-refundable</strong> for cancellations at short notice, arrivals more than 20 minutes late, or any changes made within 24 hours of the appointment.</li>
+              <li>The remaining balance is settled in full at the studio on the day of your appointment.</li>
+              <li>Prices are subject to change. Current pricing is displayed on our website and in studio.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+            <summary class="acc-head">
+              <span class="acc-emoji">⚠️</span>
+              <span class="acc-title">Allergy &amp; Safety Policy</span>
+              <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>By booking you confirm you have no known allergies to the products used, and you have disclosed any relevant medical conditions to the studio.</li>
+                <li>Puppy Beauty Bar accepts no liability for reactions arising from undisclosed allergies or medical conditions.</li>
+                <li>Lash services are not recommended during pregnancy. Please consult your GP first.</li>
+              </ul>
+              <div id="tcAllergyClause"></div>
+            </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">🏥</span>
+            <span class="acc-title">Health &amp; Safety</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>We may refuse service if we have health or safety concerns.</li>
+              <li>Please inform us of any recent eye surgery, infections, or medical procedures.</li>
+              <li><strong>Wearing contact lenses is recommended</strong> during lash appointments to help reduce eye sensitivity and discomfort 👀.</li>
+              <li>Please avoid contact with water for <strong>12 hours after your lash appointment</strong> 🛁🚫💧.</li>
+              <li>All tools and materials are sanitised between clients per UK health and safety standards.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">📸</span>
+            <span class="acc-title">Photos &amp; Privacy</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Before/after photos may be taken for portfolio use. Your explicit consent will always be sought.</li>
+              <li>You may decline or withdraw consent at any time.</li>
+              <li>Your data is processed under the <strong>UK GDPR</strong> and the Data Protection Act 2018.</li>
+              <li>We never sell or share your personal data with third parties without your consent.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">🔄</span>
+            <span class="acc-title">Aftercare, Redo &amp; Refunds</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Aftercare advice is provided after every service. Not following it may affect longevity.</li>
+              <li>Notify us <strong>within 48 hours</strong> if you are dissatisfied with your service.</li>
+              <li>We will offer a complimentary redo where appropriate, subject to assessment.</li>
+              <li>Under the <strong>Consumer Rights Act 2015</strong>, you may request a redo if the service was not carried out with reasonable care and skill.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">🧒</span>
+            <span class="acc-title">Children &amp; Guests</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>Children are not permitted in the studio unless they are the client receiving a service.</li>
+              <li>Guests are asked to wait outside or in the designated waiting area.</li>
+              <li>Puppy Beauty Bar is not responsible for personal belongings left on the premises.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="acc-item">
+          <summary class="acc-head">
+            <span class="acc-emoji">⚖️</span>
+            <span class="acc-title">Governing Law</span>
+            <svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="acc-body">
+            <ul>
+              <li>These Terms are governed by the laws of <strong>England and Wales</strong>.</li>
+              <li>Any disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</li>
+              <li>These terms do not affect your statutory rights under UK consumer law.</li>
+              <li>By booking with Puppy Beauty Bar, you confirm you have read and agreed to all terms.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="terms-footer">
+        <p>Last updated April 2026. Questions? Contact us at <a href="mailto:info@puppybeautybar.co.uk">[Your Email]</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-glow"></div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo footer-logo">Puppy Beauty Bar</div>
+        <p>Specialist lash studio, open 7 days.<br/>By appointment only.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn" id="footerInstagram">IG</a>
+          <a href="#" class="social-btn" id="footerFacebook">FB</a>
+          <a href="#" class="social-btn" id="footerTikTok">TT</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#products">Shop</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQs</a>
+        <a href="#booking">Book Now</a>
+        <a href="#terms">T&amp;Cs</a>
+        <a href="mobile.html" class="footer-mobile-link">📱 Mobile Version</a>
+      </div>
+      <div class="footer-links">
+        <h4>Services</h4>
+        <a href="#booking">Classic Extensions</a>
+        <a href="#booking">Volume Extensions</a>
+        <a href="#booking">Hybrid Extensions</a>
+        <a href="#booking">Lash Lift &amp; Tint</a>
+        <a href="#booking">Infills</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Find Us</h4>
+        <p>📍 <span id="footerAddress">[Your Salon Address]</span></p>
+        <p>📞 <span id="footerPhone">[Your Phone Number]</span></p>
+        <p>📧 <span id="footerEmail">[Your Email Address]</span></p>
+        <p>🕐 <span id="footerHours">Mon–Sun: 10:00 AM – 5:00 PM</span><br/><em>By appointment only</em></p>
+        <div id="footerQrWrap" style="margin-top:10px;display:flex;align-items:center"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Puppy Beauty Bar. All rights reserved.</p>
+      <p><a href="#" onclick="openAdmin();return false;" class="admin-footer-link">Admin</a></p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+
+  <!-- WHATSAPP FLOAT -->
+  <a id="whatsappFloat" class="whatsapp-float" href="#" aria-label="Chat on WhatsApp" style="display:none">
+    <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor" aria-hidden="true">
+      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.444.659 4.74 1.813 6.724L2 30l7.475-1.789A13.944 13.944 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5c-2.168 0-4.2-.58-5.949-1.596l-.421-.249-4.435 1.062 1.095-4.305-.275-.44A11.482 11.482 0 014.5 16C4.5 9.596 9.596 4.5 16 4.5S27.5 9.596 27.5 16 22.404 27.5 16 27.5zm6.344-8.663c-.348-.174-2.063-1.017-2.383-1.133-.32-.116-.553-.174-.786.174-.232.348-.9 1.133-1.104 1.366-.203.232-.406.261-.754.087-.348-.174-1.47-.542-2.8-1.727-1.035-.922-1.733-2.06-1.937-2.408-.203-.348-.022-.536.153-.71.157-.156.348-.406.522-.609.174-.203.232-.348.348-.58.116-.232.058-.436-.029-.609-.087-.174-.786-1.895-1.078-2.595-.283-.682-.57-.59-.786-.6-.203-.01-.436-.012-.67-.012-.232 0-.609.087-.928.436-.32.348-1.218 1.191-1.218 2.906s1.247 3.369 1.42 3.601c.174.232 2.453 3.745 5.943 5.253.831.358 1.479.572 1.984.733.834.265 1.594.228 2.195.138.669-.1 2.063-.843 2.354-1.657.29-.813.29-1.51.203-1.657-.087-.145-.32-.232-.668-.406z"/>
+    </svg>
+  </a>
+
+  <!-- ADMIN OVERLAY -->
+  <div class="admin-overlay" id="adminOverlay" style="display:none" onclick="closeAdmin()">
+
+    <!-- Login panel -->
+    <div class="admin-panel" id="adminLoginPanel" onclick="event.stopPropagation()">
+      <div class="admin-panel-head">
+        <h3>Admin Login</h3>
+        <button class="admin-close-btn" onclick="closeAdmin()">✕</button>
+      </div>
+      <div class="admin-panel-body">
+        <div class="form-group"><label>Username</label><input type="text" id="adminUser" placeholder="Username" autocomplete="off"/></div>
+        <div class="form-group" style="margin-top:12px"><label>Password</label><input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()"/></div>
+        <p class="admin-error" id="adminError" style="display:none">Incorrect username or password.</p>
+        <button class="btn-primary btn-full" style="margin-top:18px" onclick="adminLogin()">Login</button>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="admin-panel admin-panel-wide" id="adminDashboard" style="display:none" onclick="event.stopPropagation()">
+      <div class="admin-panel-head">
+        <h3>Admin Dashboard — Puppy Beauty Bar</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="admin-logout-btn" onclick="adminLogout()">Logout</button>
+          <button class="admin-close-btn" onclick="closeAdmin()">✕</button>
+        </div>
+      </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active" id="adminTab_availability" onclick="switchAdminTab('availability')">Availability</button>
+        <button class="admin-tab" id="adminTab_bookings"     onclick="switchAdminTab('bookings')">Bookings <span class="admin-badge" id="adminBookingBadge">0</span></button>
+        <button class="admin-tab" id="adminTab_services"     onclick="switchAdminTab('services')">Services</button>
+        <button class="admin-tab" id="adminTab_membership"   onclick="switchAdminTab('membership')">Membership Events</button>
+        <button class="admin-tab" id="adminTab_products"     onclick="switchAdminTab('products')">Products</button>
+        <button class="admin-tab" id="adminTab_reviews"      onclick="switchAdminTab('reviews')">Reviews <span class="admin-badge" id="adminReviewBadge">0</span></button>
+        <button class="admin-tab" id="adminTab_photos"       onclick="switchAdminTab('photos')">Photos</button>
+        <button class="admin-tab" id="adminTab_contact"      onclick="switchAdminTab('contact')">Contact</button>
+        <button class="admin-tab" id="adminTab_settings"     onclick="switchAdminTab('settings')">Settings</button>
+      </div>
+      <div class="admin-body" id="adminTabBody_availability"></div>
+      <div class="admin-body" id="adminTabBody_bookings"    style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_services"    style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_membership"  style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_products"    style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_reviews"     style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_photos"      style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_contact"     style="display:none"></div>
+      <div class="admin-body" id="adminTabBody_settings"    style="display:none"></div>
+    </div>
+
+  </div>
+
+  <!-- QR preview modal (click any QR image to enlarge) -->
+  <div id="qrModal" class="qr-modal" onclick="hideQrModal()">
+    <div class="qr-modal-inner" onclick="event.stopPropagation()">
+      <button class="qr-modal-close" onclick="hideQrModal()">✕</button>
+      <img id="qrModalImg" class="qr-modal-img" src="" alt="QR code">
+      <div id="qrModalLabel" style="text-align:center;margin-top:8px;color:var(--mid)"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="qr-modal.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
